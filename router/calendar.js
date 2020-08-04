@@ -19,7 +19,6 @@ router.get('/calendar', async (ctx) => {
     result['data']['meta']['login_status'] = true;
     result['data']['meta']['site_title'] = 'カレンダー - Medice Note';
 
-
     if (session.error !== undefined) {
         result['data']['error'] = session.error;
         session.error = undefined;
