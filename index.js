@@ -9,6 +9,7 @@ const SQLite3Store = require('koa-sqlite3-session');
 const json = require('koa-json')
 const config = require('./config.json');
 
+
 let uploadCache = path.join(__dirname, '/upload_cache')
 if (!fs.existsSync(uploadCache)) {
     fs.mkdir(uploadCache, () => { });
@@ -133,5 +134,14 @@ app.use(accountDeleteRouter.allowedMethods());
 const apiMedicineRouter = require('./router/api-medicine');
 app.use(apiMedicineRouter.routes());
 app.use(apiMedicineRouter.allowedMethods());
+
+const calenderRouter = require('./router/calendar');
+app.use(calenderRouter.routes());
+app.use(calenderRouter.allowedMethods());
+
+const apiCalenderRouter = require('./router/api-calendar');
+app.use(apiCalenderRouter.routes());
+app.use(apiCalenderRouter.allowedMethods());
+
 
 app.listen(5000);
