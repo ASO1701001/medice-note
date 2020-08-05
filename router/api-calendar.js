@@ -7,8 +7,10 @@ router.get('/api/calendar/', async (ctx) => {
     let session = ctx.session;
     let authKey = session.auth_id;
     let userId = await app.getUserId(authKey);
+
     let start = ctx.request.query['start'];
     let end = ctx.request.query['end'];
+
     let sql = 'SELECT group_id FROM medicine_group WHERE user_id = ?';
     let [group] = await connection.query(sql, [userId]);
     let groupid = [];

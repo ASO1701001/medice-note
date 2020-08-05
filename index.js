@@ -27,6 +27,7 @@ render(app, {
     cache: false,
     debug: false
 });
+
 app.use(server('./public'));
 app.use(koaBody({
     multipart: true,
