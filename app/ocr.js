@@ -15,6 +15,9 @@ class DistanceChecker {
         return this
     }
     setResult(target, item){
+        if(typeof item === 'undefined'){
+            item = '';
+        }
         this.resultList[target.name] = item;
     }
 
