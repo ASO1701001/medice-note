@@ -129,19 +129,17 @@ function getOCRText(jsonObject) {
 
 // jsonから薬の名前一覧を取得し、配列で返す。
 function getMedicineData() {
-    let medicineList = require('../public/data/medicine.json');
-    return medicineList;
+    return require('../public/data/medicine.json');
 }
 
 // jsonから病院名一覧を取得し、配列で返す。
 function getHospitalData() {
-    let hospitalList = require('../public/data/hospital.json');
-    return hospitalList;
+    return require('../public/data/hospital.json');
 }
 
 // cloud visionから受け取ったjson内のテキストデータを行ごとに分割し、配列で返す。
 function splitLine(jsonObject) {
-    let splitText = jsonObject['fullTextAnnotation']['text'].split('\n');
+    let splitText = jsonObject.split('\n');
     return splitText.slice(0, splitText.length - 1)
 }
 
