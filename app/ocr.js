@@ -40,6 +40,8 @@ class DistanceChecker {
                 case 4:
                     result = this.getDate();
                     break;
+                case 5:
+                    result = this.getTakeNumber();
             }
             this.setResult(target, result);
         }
@@ -101,6 +103,20 @@ class DistanceChecker {
             }
         }
     }
+
+    // 一度に飲む数量を返す。
+    // 前後の行も含めるとか、ある程度範囲を持って検索かける方向で作ってたけど、
+    // 飲む個数は間違えられない項目だから、一番厳しく「.*1回x[単位].*」の形式でしか読み取らないようにする。
+    getTakeNumber() {
+        // 飲む個数は後半にありがちみたいだから逆順で判定
+        let reverseList = [].concat(this.OCRData).reverse();
+        for (let row of reverseList) {
+            let result = row.match(/1回(\d)(個|カプセル|錠|包|ml|mL|g|mg)/);
+            if (result) {
+                return result[1];
+            }
+        }
+    }
 }
 
 // DistanceCheckerの調査対象。DistanceChecker.setTarget()でインスタンス化する。
@@ -123,7 +139,8 @@ function getOCRText(jsonObject) {
         .setTarget('medicineName', 1, {'targetList': medicineJSONData, 'minDistance': 0.9})
         .setTarget('hospitalName', 2, {'targetList': hospitalJSONData, 'minDistance': 0.9})
         .setTarget('period', 3)
-        .setTarget('date', 4);
+        .setTarget('date', 4)
+        .setTarget('takeNumber', 5);
 
     return checker.execute();
 }
