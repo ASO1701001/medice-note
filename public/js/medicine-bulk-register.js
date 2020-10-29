@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    bindAutocompleteMedicineName();
-    bindAutocompleteHospital();
+    bindAutocompleteHospitalName();
 
     addMedicine([]);
 });
@@ -19,8 +18,8 @@ function bindAutocompleteMedicineName() {
     });
 }
 
-function bindAutocompleteHospital() {
-    $('.autocomplete-hospital').autocomplete({
+function bindAutocompleteHospitalName() {
+    $('.autocomplete-hospital-name').autocomplete({
         source: (request, response) => {
             $.getJSON('/data/hospital.json', (data) => {
                 let array = $.map(data, (value) => {
@@ -69,6 +68,7 @@ function ocrImagePicker() {
                 notyf.success('文字を検出しました');
 
                 let basicDom = $('div[data-type=medicine-basic]');
+                // noinspection JSJQueryEfficiency
                 let itemDom = $('div[data-type=medicine-item]');
                 basicDom = basicDom[0];
 
@@ -84,15 +84,17 @@ function ocrImagePicker() {
                     }
                 }
 
-                response['result']['hospitalName'] = '福岡大学病院';
-                // response['result'][3]['startsDate'] = '2020-10-27';
-
-                if (response['result']['hospitalName'] !== undefined || response['result']['hospitalName'] !== '') {
-                    $(basicDom).find('input[name=hospital_name]').val(response['result']['hospitalName']);
+                // noinspection JSJQueryEfficiency
+                if (response['result']['medicineName'].length === 0 && $('div[data-type=medicine-item]').length === 0) {
+                    addMedicine([]);
                 }
-                // if (response['result'][3]['startsDate'] !== undefined || response['result'][3]['startsDate'] !== '') {
-                //     $(basicDom).find('input[name=starts_date]').val(response['result'][3]['startsDate'][0]);
-                // }
+
+                if (response['result']['hospitalName']['result'] !== undefined || response['result']['hospitalName']['result'] !== '') {
+                    $(basicDom).find('input[name=hospital_name]').val(response['result']['hospitalName']['result']);
+                }
+                if (response['result']['date'] !== undefined || response['result']['date'] !== '') {
+                    $(basicDom).find('input[name=starts_date]').val(response['result']['date']);
+                }
 
                 for (let i = 0; i < response['result']['medicineName'].length; i++) {
                     let medicineName = response['result']['medicineName'][i]['result'];
@@ -232,7 +234,7 @@ async function postMedicine(button) {
         };
     }
 
-    if(!$(button).hasClass('clicked') || !$(button).hasClass('btn-progress')) {
+    if (!$(button).hasClass('clicked') || !$(button).hasClass('btn-progress')) {
         $(button).addClass('disabled');
         $(button).addClass('btn-progress');
     }
@@ -242,7 +244,7 @@ async function postMedicine(button) {
     $.ajax({
         type: 'post',
         url: '/bulk-register',
-        data:JSON.stringify(data),
+        data: JSON.stringify(data),
         contentType: 'application/json',
         dataType: 'json'
     }).done(function (json) {
@@ -260,24 +262,27 @@ async function postMedicine(button) {
                 $(basicDom).find('div[data-item-name="group-id"] > span.form-error').text(error['group_id']);
             }
 
-            let item = error['item'];
-            for (let i = 1; i < item.length; i++) {
-                let medicineItem = $(`div[data-medicine-item-id="${i}"]`);
+            if (error['item'] !== undefined) {
+                let item = error['item'];
 
-                if (item[i]['medicine_name'] !== undefined) {
-                    $(medicineItem).find('div[data-item-name="medicine-name"] > span.form-error').text(item[i]['medicine_name']);
-                }
-                if (item[i]['number'] !== undefined) {
-                    $(medicineItem).find('div[data-item-name="number"] > span.form-error').text(item[i]['number']);
-                }
-                if (item[i]['period'] !== undefined) {
-                    $(medicineItem).find('div[data-item-name="period"] > span.form-error').text(item[i]['period']);
-                }
-                if (item[i]['take_time'] !== undefined) {
-                    $(medicineItem).find('div[data-item-name="take-time"] > span.form-error').text(item[i]['take_time']);
-                }
-                if (item[i]['medicine_type'] !== undefined) {
-                    $(medicineItem).find('div[data-item-name="medicine-type"] > span.form-error').text(item[i]['medicine_type']);
+                for (let i = 1; i < item.length; i++) {
+                    let medicineItem = $(`div[data-medicine-item-id="${i}"]`);
+
+                    if (item[i]['medicine_name'] !== undefined) {
+                        $(medicineItem).find('div[data-item-name="medicine-name"] > span.form-error').text(item[i]['medicine_name']);
+                    }
+                    if (item[i]['number'] !== undefined) {
+                        $(medicineItem).find('div[data-item-name="number"] > span.form-error').text(item[i]['number']);
+                    }
+                    if (item[i]['period'] !== undefined) {
+                        $(medicineItem).find('div[data-item-name="period"] > span.form-error').text(item[i]['period']);
+                    }
+                    if (item[i]['take_time'] !== undefined) {
+                        $(medicineItem).find('div[data-item-name="take-time"] > span.form-error').text(item[i]['take_time']);
+                    }
+                    if (item[i]['medicine_type'] !== undefined) {
+                        $(medicineItem).find('div[data-item-name="medicine-type"] > span.form-error').text(item[i]['medicine_type']);
+                    }
                 }
             }
         } else {

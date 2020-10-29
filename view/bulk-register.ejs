@@ -24,6 +24,14 @@
     </div>
 <% } %>
 
+<style>
+    @media (max-width: 768px) {
+        .card .card-header h4+.card-header-action {
+            width: unset;
+        }
+    }
+</style>
+
 <div class="card">
     <div class="card-header">
         <h4></h4>
@@ -41,7 +49,7 @@
                 <div class="row" data-type="medicine-basic">
                     <div class="form-group col-12 col-md-4" data-item-name="hospital-name">
                         <label>病院名</label>
-                        <input type="text" class="form-control autocomplete-hospital" name="hospital_name" required>
+                        <input type="text" class="form-control autocomplete-hospital-name" name="hospital_name" required>
                         <span class="form-error"></span>
                     </div>
                     <div class="form-group col-12 col-md-4" data-item-name="starts-date">
@@ -79,14 +87,14 @@
 <script type="text/x-handlebars-template" id="template_medicine_item">
     <div class="col-12" data-type="medicine-item" data-medicine-item-id="">
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 order-2">
                 <div class="form-group" data-item-name="medicine-name">
                     <label>薬の名前</label>
                     <input type="text" class="form-control autocomplete-medicine-name" name="medicine_name" value="{{#if medicine_name}}{{medicine_name}}{{/if}}" required>
                     <span class="form-error"></span>
                 </div>
             </div>
-            <div class="col-12 col-md-6 text-right" style="padding-top: 30px;">
+            <div class="col-12 col-md-6 text-right order-2" style="padding-top: 30px;">
                 <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="deleteMedicine(this)">項目を削除</a>
             </div>
         </div>
