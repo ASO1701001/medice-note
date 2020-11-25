@@ -22,7 +22,7 @@ router.get('/two-factor-authentication-setting', async (ctx) => {
     result['data']['meta']['site_title'] = '二段階認証設定 - Medice Note';
     result['data']['meta']['group_list'] = await app.getGroupList(userId);
 
-    let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ?';
+    let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ? ORDER BY timestamp DESC';
     let [data] = await connection.query(sql, [userId]);
 
     result['data']['login_pc'] = data.map(value => {
@@ -84,7 +84,7 @@ router.post('/two-factor-authentication-setting', async (ctx) => {
     sql = 'DELETE FROM user_login_pc WHERE pc_uuid = ?';
     await connection.query(sql, [uuid]);
 
-    session.success.message = 'パソコン情報を削除しました';
+    session.success.message = 'パソコン情報を削除しました<br>次回から二段階認証を行います';
 
     ctx.redirect('/two-factor-authentication-setting');
 });
