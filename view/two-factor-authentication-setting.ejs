@@ -32,32 +32,30 @@
     <% } else { %>
         <div class="card">
             <div class="card-body">
-                <ul class="list-unstyled">
+                <div class="row">
                     <%
                     data.login_pc.forEach(value => { %>
-                        <li class="media">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1"><%= value['env_name'] %></h5>
-                                <div class="form-group mb-2">
-                                    <label>ユーザーエージェント</label>
-                                    <p><%= value['env_ua'] %></p>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label>IPアドレス</label>
-                                    <p><%= value['env_ip'] %></p>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label>登録日時</label>
-                                    <p><%= value['timestamp'] %></p>
-                                </div>
-                                <form action="/two-factor-authentication-setting" method="post">
-                                    <input type="hidden" name="uuid" value="<%= value['uuid'] %>">
-                                    <button type="submit" class="btn btn-danger mb-3">削除</button>
-                                </form>
+                        <div class="col-12 col-md-6">
+                            <h5 class="mt-0 mb-1"><%= value['env_name'] %></h5>
+                            <div class="form-group mb-2">
+                                <label>ユーザーエージェント</label>
+                                <p><%= value['env_ua'] %></p>
                             </div>
-                        </li>
+                            <div class="form-group mb-2">
+                                <label>IPアドレス</label>
+                                <p><%= value['env_ip'] %></p>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>登録日時</label>
+                                <p><%= value['timestamp'] %></p>
+                            </div>
+                            <form action="/two-factor-authentication-setting" method="post">
+                                <input type="hidden" name="uuid" value="<%= value['uuid'] %>">
+                                <button type="submit" class="btn btn-danger mb-3">削除</button>
+                            </form>
+                        </div>
                     <% }) %>
-                </ul>
+                </div>
             </div>
         </div>
     <% }
