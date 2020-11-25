@@ -28,7 +28,7 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     let userId = auth[0]['user_id'];
     let sessionId = uuid().split('-').join('');
 
-    sql = 'INSERT INTO session VALUES (?, ?, DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY))';
+    sql = 'INSERT INTO session VALUES (?, ?, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY))';
     await connection.query(sql, [userId, sessionId]);
 
     if (pcUuid !== undefined) {
