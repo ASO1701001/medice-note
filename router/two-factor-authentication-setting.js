@@ -28,10 +28,8 @@ router.get('/two-factor-authentication-setting', async (ctx) => {
     let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ? AND validity_flag = true ORDER BY timestamp DESC';
     let [data] = await connection.query(sql, [userId]);
 
-    const dbBuffer = fs.readFileSync(path.join(__dirname, '../private/GeoLite2-Country.mmdb'));
+    const dbBuffer = fs.readFileSync(path.join(__dirname, '../storage/GeoLite2-Country.mmdb'));
     const reader = Reader.openBuffer(dbBuffer);
-
-    console.log();
 
     result['data']['login_pc'] = data.map(value => {
         let ua = parser(value['env_ua']);
