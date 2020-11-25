@@ -91,6 +91,8 @@
                             <% } %>
                         </span>
                     </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>処方日 *</label>
@@ -101,7 +103,7 @@
                             <span class="form-error">
                                 <% if (typeof data.error.starts_date !== "undefined") { %>
                                     <%= data.error.starts_date %>
-                                <% } %>
+                                    <% } %>
                             </span>
                         </div>
                         <div class="form-group col-md-6">
@@ -115,7 +117,7 @@
                             <span class="form-error">
                                 <% if (typeof data.error.period !== "undefined") { %>
                                     <%= data.error.period %>
-                                <% } %>
+                                    <% } %>
                             </span>
                         </div>
                     </div>
@@ -124,17 +126,17 @@
                         <select class="form-control select2" name="medicine_type" required>
                             <% if (typeof data.meta.medicine_type != "undefined") {
                                 for (var mt = 0; mt < data.meta.medicine_type.length; mt++) { %>
-                                    <option value="<%= data.meta.medicine_type[mt]['type_id'] %>"
-                                        <% if (typeof data.old.type_id != "undefined" && data.old.type_id == data.meta.medicine_type[mt]['type_id']) { %> selected <% } %>>
-                                        <%= data.meta.medicine_type[mt]['type_name'] %>
-                                    </option>
+                                <option value="<%= data.meta.medicine_type[mt]['type_id'] %>"
+                                <% if (typeof data.old.type_id != "undefined" && data.old.type_id == data.meta.medicine_type[mt]['type_id']) { %> selected <% } %>>
+                                    <%= data.meta.medicine_type[mt]['type_name'] %>
+                                </option>
                                 <% }
                             } %>
                         </select>
                         <span class="form-error">
                             <% if (typeof data.error.medicine_type !== "undefined") { %>
                                 <%= data.error.medicine_type %>
-                            <% } %>
+                                <% } %>
                         </span>
                     </div>
                     <div class="form-group">
@@ -142,12 +144,12 @@
                         <select class="form-control select2" name="group_id" required>
                             <% if (typeof data.meta.group_list != "undefined") {
                                 for (var gl = 0; gl < data.meta.group_list.length; gl++) {
-                                    %>
-                                        <option value="<%= data.meta.group_list[gl]['group_id'] %>"
-                                        <% if (typeof data.old.group_id !== "undefined" && data.old.group_id == data.meta.group_list[gl]['group_id']) { %> selected <% } %>>
-                                            <%= data.meta.group_list [gl]['group_name'] %>
-                                        </option>
-                                    <%
+                            %>
+                                <option value="<%= data.meta.group_list[gl]['group_id'] %>"
+                                    <% if (typeof data.old.group_id !== "undefined" && data.old.group_id == data.meta.group_list[gl]['group_id']) { %> selected <% } %>>
+                                    <%= data.meta.group_list [gl]['group_name'] %>
+                                </option>
+                                <%
                                 }
                             } %>
                         </select>
@@ -158,28 +160,39 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-6">
+                <div class="col-12">
                     <div class="form-group">
-                        <label>薬画像</label>
-                        <div class="custom-file">
-                            <input type="file" accept="image/jpeg,image/png" name="medicine_image" class="custom-file-input" id="medicine-image">
-                            <label class="custom-file-label" id="medicine-image-label">ファイルを選択</label>
+                        <div style="text-align: right">
+                            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#medicineUpdate" aria-expanded="false" aria-controls="medicineRegister">
+                                追加項目
+                            </button>
                         </div>
-                        <span class="form-error">
-                            <% if (typeof data.error.medicine_image !== "undefined") { %>
-                                <%= data.error.medicine_image %>
-                            <% } %>
-                        </span>
-                        <div class="form-text text-muted">1MB以内のJPEG・PNGファイルを選択 (個人情報が含まれる画像はアップロードしないでください)</div>
                     </div>
-                    <div class="form-group">
-                        <label>説明</label>
-                        <textarea class="form-control" name="description"><% if (typeof data.old.description !== "undefined") { %><%= data.old.description %><% } %></textarea>
-                        <span class="form-error">
-                            <% if (typeof data.error.description !== "undefined") { %>
-                                <%= data.error.description %>
-                            <% } %>
-                        </span>
+                    <div class="col-12 col-sm-6">
+                        <div class="collapse" id="medicineUpdate">
+                            <div class="form-group">
+                                <label>薬画像</label>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/jpeg,image/png" name="medicine_image" class="custom-file-input" id="medicine-image">
+                                    <label class="custom-file-label" id="medicine-image-label">ファイルを選択</label>
+                                </div>
+                                <span class="form-error">
+                                    <% if (typeof data.error.medicine_image !== "undefined") { %>
+                                        <%= data.error.medicine_image %>
+                                        <% } %>
+                                </span>
+                                <div class="form-text text-muted">1MB以内のJPEG・PNGファイルを選択 (個人情報が含まれる画像はアップロードしないでください)</div>
+                            </div>
+                            <div class="form-group">
+                                <label>説明</label>
+                                <textarea class="form-control" name="description"><% if (typeof data.old.description !== "undefined") { %><%= data.old.description %><% } %></textarea>
+                                <span class="form-error">
+                                    <% if (typeof data.error.description !== "undefined") { %>
+                                        <%= data.error.description %>
+                                        <% } %>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
