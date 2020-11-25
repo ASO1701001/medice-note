@@ -57,6 +57,14 @@ const indexRouter = require('./router/index');
 app.use(indexRouter.routes());
 app.use(indexRouter.allowedMethods());
 
+const functionIntroduction = require('./router/introduction');
+app.use(functionIntroduction.routes());
+app.use(functionIntroduction.allowedMethods());
+
+const contactRouter = require('./router/contact');
+app.use(contactRouter.routes());
+app.use(contactRouter.allowedMethods());
+
 // Account
 const signupRouter = require('./router/signup');
 app.use(signupRouter.routes());
@@ -86,17 +94,9 @@ const authPasswordRouter = require('./router/auth-password');
 app.use(authPasswordRouter.routes());
 app.use(authPasswordRouter.allowedMethods());
 
-const functionIntroduction = require('./router/introduction');
-app.use(functionIntroduction.routes());
-app.use(functionIntroduction.allowedMethods());
-
 const renewMailAuthRouter = require('./router/renew-mail-auth');
 app.use(renewMailAuthRouter.routes());
 app.use(renewMailAuthRouter.allowedMethods());
-
-const contactRouter = require('./router/contact');
-app.use(contactRouter.routes());
-app.use(contactRouter.allowedMethods());
 
 // Medicine
 const medicineRouter = require('./router/medicine');
