@@ -22,7 +22,7 @@ router.get('/two-factor-authentication-setting', async (ctx) => {
     result['data']['meta']['site_title'] = '二段階認証設定 - Medice Note';
     result['data']['meta']['group_list'] = await app.getGroupList(userId);
 
-    let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ? ORDER BY timestamp DESC';
+    let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ? AND validity_flag = true ORDER BY timestamp DESC';
     let [data] = await connection.query(sql, [userId]);
 
     result['data']['login_pc'] = data.map(value => {
