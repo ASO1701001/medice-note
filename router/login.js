@@ -102,8 +102,8 @@ router.post('/login', async (ctx) => {
                 await connection.query(sql, [pcUuid, userId, ua, ip]);
             }
 
-            let authKey = uuid() + uuid() + uuid()
-            authKey = authKey.split('-').join('')
+            let authKey = uuid() + uuid() + uuid();
+            authKey = authKey.split('-').join('');
 
             sql = 'INSERT INTO user_two_factor_authentication VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 10 MINUTE))';
             await connection.query(sql, [userId, authKey]);
