@@ -4,6 +4,9 @@ const connection = require('../app/db');
 const app = require('../app/app');
 const parser = require('ua-parser-js');
 const dateformat = require('dateformat');
+const fs = require('fs');
+const path = require('path');
+const Reader = require('@maxmind/geoip2-node').Reader;
 
 router.get('/two-factor-authentication-setting', async (ctx) => {
     let session = ctx.session;
@@ -25,17 +28,30 @@ router.get('/two-factor-authentication-setting', async (ctx) => {
     let sql = 'SELECT pc_uuid, env_ua, env_ip, validity_flag, timestamp FROM user_login_pc WHERE user_id = ? AND validity_flag = true ORDER BY timestamp DESC';
     let [data] = await connection.query(sql, [userId]);
 
+    const dbBuffer = fs.readFileSync(path.join(__dirname, '../private/GeoLite2-Country.mmdb'));
+    const reader = Reader.openBuffer(dbBuffer);
+
+    console.log();
+
     result['data']['login_pc'] = data.map(value => {
         let ua = parser(value['env_ua']);
 
         let uaBrowser = ua.browser.name === undefined ? '不明なブラウザ' : `${ua.browser.name} ${ua.browser.major}`;
         let uaOs = ua.os.name === undefined ? '不明なOS' : `${ua.os.name} ${ua.os.version}`;
+        let envIp = value['env_ip']
+
+        try {
+            let response = reader.country(envIp);
+            envIp = `${envIp} (${response.country.names.ja})`;
+        } catch (e) {
+            envIp = `${envIp} (不明)`;
+        }
 
         return {
             uuid: value['pc_uuid'],
             env_name: `${uaBrowser}（${uaOs}）`,
             env_ua: value['env_ua'],
-            env_ip: value['env_ip'],
+            env_ip: envIp,
             validity_flag: value['validity_flag'],
             timestamp: dateformat(value['timestamp'], 'yyyy年mm月dd日 HH時MM分ss秒')
         }
