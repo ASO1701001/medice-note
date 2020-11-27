@@ -154,35 +154,37 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-md-lg-6">
-                    <div id="accordion_register">
-                        <div class="accordion">
-                            <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-register" aria-expanded="false">
-                                <h4>薬画像・説明</h4>
-                            </div>
-                            <div class="col-12" style="padding: 0">
-                                <div class="accordion-body collapse" id="panel-body-register" data-parent="#accordion_register" style="padding: 0">
-                                    <div class="form-group">
-                                        <label style="margin-top: 15px">薬画像</label>
-                                        <div class="custom-file">
-                                            <input type="file" accept="image/jpeg,image/png" name="medicine_image" class="custom-file-input" id="medicine-image">
-                                            <label class="custom-file-label" id="medicine-image-label">ファイルを選択</label>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <div id="accordion_register">
+                            <div class="accordion">
+                                <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-register" aria-expanded="false">
+                                    <h4>薬画像・説明</h4>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <div class="accordion-body collapse p-0" id="panel-body-register" data-parent="#accordion_register">
+                                        <div class="form-group">
+                                            <label class="mt-3">薬画像</label>
+                                            <div class="custom-file">
+                                                <input type="file" accept="image/jpeg,image/png" name="medicine_image" class="custom-file-input" id="medicine-image">
+                                                <label class="custom-file-label" id="medicine-image-label">ファイルを選択</label>
+                                            </div>
+                                            <span class="form-error">
+                                                <% if (typeof data.error.medicine_image !== "undefined") { %>
+                                                    <%= data.error.medicine_image %>
+                                                <% } %>
+                                            </span>
+                                            <div class="form-text text-muted">1MB以内のJPEG・PNGファイルを選択 (個人情報が含まれる画像はアップロードしないでください)</div>
                                         </div>
-                                        <span class="form-error">
-                                            <% if (typeof data.error.medicine_image !== "undefined") { %>
-                                                <%= data.error.medicine_image %>
+                                        <div class="form-group">
+                                            <label>説明</label>
+                                            <textarea class="form-control" name="description"><% if (typeof data.old.description !== "undefined") { %><%= data.old.description %><% } %></textarea>
+                                            <span class="form-error">
+                                                <% if (typeof data.error.description !== "undefined") { %>
+                                                    <%= data.error.description %>
                                                 <% } %>
-                                        </span>
-                                        <div class="form-text text-muted">1MB以内のJPEG・PNGファイルを選択 (個人情報が含まれる画像はアップロードしないでください)</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>説明</label>
-                                        <textarea class="form-control" name="description"><% if (typeof data.old.description !== "undefined") { %><%= data.old.description %><% } %></textarea>
-                                        <span class="form-error">
-                                            <% if (typeof data.error.description !== "undefined") { %>
-                                                <%= data.error.description %>
-                                                <% } %>
-                                        </span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
