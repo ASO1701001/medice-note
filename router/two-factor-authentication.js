@@ -9,6 +9,7 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     app.initializeSession(session);
 
     let authKey = ctx.params['auth_key'];
+    let pcUuid = ctx.request.query['uuid'];
 
     let sql = 'DELETE FROM user_two_factor_authentication WHERE expires_at <= NOW()';
     await connection.query(sql, [authKey]);
@@ -27,8 +28,13 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     let userId = auth[0]['user_id'];
     let sessionId = uuid().split('-').join('');
 
-    sql = 'INSERT INTO session VALUES (?, ?, DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY))';
+    sql = 'INSERT INTO session VALUES (?, ?, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY))';
     await connection.query(sql, [userId, sessionId]);
+
+    if (pcUuid !== undefined) {
+        sql = 'UPDATE user_login_pc SET validity_flag = true WHERE user_id = ? AND pc_uuid = ?';
+        await connection.query(sql, [userId, pcUuid]);
+    }
 
     session.auth_id = sessionId;
 
