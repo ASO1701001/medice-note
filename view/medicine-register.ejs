@@ -40,7 +40,7 @@
                         <label>薬の名前 *</label>
                         <input type="text" class="form-control" name="medicine_name" id="medicine_name" required
                         <% if (typeof data.old.medicine_name !== "undefined") { %> value="<%= data.old.medicine_name %>" <% } %>>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.medicine_name !== "undefined") { %>
                                 <%= data.error.medicine_name %>
                             <% } %>
@@ -50,7 +50,7 @@
                         <label>病院名 *</label>
                         <input type="text" class="form-control" name="hospital_name" id="hospital_name" required
                         <% if (typeof data.old.hospital_name !== "undefined") { %> value="<%= data.old.hospital_name %>" <% } %>>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.hospital_name !== "undefined") { %>
                                 <%= data.error.hospital_name %>
                             <% } %>
@@ -60,7 +60,7 @@
                         <label>飲む個数 *</label>
                         <input type="number" class="form-control" min="1" name="number" required
                         <% if (typeof data.old.number !== "undefined") { %> value="<%= data.old.number %>" <% } else { %> value="1" <% } %>>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.number !== "undefined") { %>
                                 <%= data.error.number %>
                             <% } %>
@@ -78,7 +78,7 @@
                             <% }
                             } %>
                         </select>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.take_time !== "undefined") { %>
                                 <%= data.error.take_time %>
                             <% } %>
@@ -91,7 +91,7 @@
                             <label>処方日 *</label>
                             <input type="text" class="form-control datepicker readonly-background" name="starts_date" required readonly
                             <% if (typeof data.old.starts_date !== "undefined") { %> value="<%= data.old.starts_date %>" <% } %>>
-                            <span class="form-error">
+                            <span class="form-error" style="height: 20px">
                                 <% if (typeof data.error.starts_date !== "undefined") { %>
                                     <%= data.error.starts_date %>
                                 <% } %>
@@ -101,7 +101,7 @@
                             <label>処方期間 (日) *</label>
                             <input type="number" class="form-control" min="1" name="period" required
                             <% if (typeof data.old.period !== "undefined") { %> value="<%= data.old.period %>" <% } else { %> value="1" <% } %>>
-                            <span class="form-error">
+                            <span class="form-error" style="height: 20px">
                                 <% if (typeof data.error.period !== "undefined") { %>
                                     <%= data.error.period %>
                                 <% } %>
@@ -122,7 +122,7 @@
                             }
                             } %>
                         </select>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.medicine_type !== "undefined") { %>
                                 <%= data.error.medicine_type %>
                             <% } %>
@@ -147,7 +147,7 @@
                             }
                             } %>
                         </select>
-                        <span class="form-error">
+                        <span class="form-error" style="height: 20px">
                             <% if (typeof data.error.group_id !== "undefined") { %>
                                 <%= data.error.group_id %>
                             <% } %>
@@ -169,7 +169,7 @@
                                                 <input type="file" accept="image/jpeg,image/png" name="medicine_image" class="custom-file-input" id="medicine-image">
                                                 <label class="custom-file-label" id="medicine-image-label">ファイルを選択</label>
                                             </div>
-                                            <span class="form-error">
+                                            <span class="form-error" style="height: 20px">
                                                 <% if (typeof data.error.medicine_image !== "undefined") { %>
                                                     <%= data.error.medicine_image %>
                                                 <% } %>
