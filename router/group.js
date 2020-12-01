@@ -39,7 +39,7 @@ router.get('/group/:group_id', async (ctx) => {
     ];
 
     let sql = `
-        SELECT medicine_id, medicine_name, hospital_name, number, date_format(starts_date, '%Y年%c月%d日') as starts_date, period,
+        SELECT medicine_id, medicine_name, hospital_name, number, date_format(starts_date, '%Y年%m月%d日') as starts_date, period,
                medicine_type.type_name, image, description, medicine.group_id, medicine_group.group_name
         FROM medicine
         LEFT JOIN medicine_type ON medicine.type_id = medicine_type.type_id
