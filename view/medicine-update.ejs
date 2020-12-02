@@ -28,6 +28,9 @@
     .custom-file-label::after {
         content: "選択";
     }
+    .form-error {
+        height: 20px;
+    }
 </style>
 
 <div class="card">
@@ -41,8 +44,8 @@
                         <input type="text" class="form-control" name="medicine_name" id="medicine_name" required
                         <% if (typeof data.old.medicine_name !== "undefined") { %>
                                value="<%= data.old.medicine_name %>"
-                                <% } %>>
-                        <span class="form-error" style="height: 20px">
+                        <% } %>>
+                        <span class="form-error">
                             <% if (typeof data.error.medicine_name !== "undefined") { %>
                                 <%= data.error.medicine_name %>
                             <% } %>
@@ -54,7 +57,7 @@
                         <% if (typeof data.old.hospital_name !== "undefined") { %> value="<%= data.old.hospital_name %>"
                                 <% } %>
                         >
-                        <span class="form-error" style="height: 20px">
+                        <span class="form-error">
                             <% if (typeof data.error.hospital_name !== "undefined") { %>
                                 <%= data.error.hospital_name %>
                             <% } %>
@@ -67,7 +70,7 @@
                         <% } else { %> value="1"
                                 <% } %>
                         >
-                        <span class="form-error" style="height: 20px">
+                        <span class="form-error">
                             <% if (typeof data.error.number !== "undefined") { %>
                                 <%= data.error.number %>
                             <% } %>
@@ -79,13 +82,13 @@
                             <% if (typeof data.meta.take_time != "undefined") {
                             for (var tt = 0; tt < data.meta.take_time.length; tt++) { %>
                                 <option value="<%= data.meta.take_time[tt]['take_time_id'] %>"
-                                <% if (typeof data.old.take_time != "undefined" && data.old.take_time.some(d => d == data.meta.take_time[tt]['take_time_id'])) { %> selected <% } %>>
+                                    <% if (typeof data.old.take_time != "undefined" && data.old.take_time.some(d => d == data.meta.take_time[tt]['take_time_id'])) { %> selected <% } %>>
                                     <%= data.meta.take_time[tt]['take_time_name'] %>
                                 </option>
                             <% }
                             } %>
                         </select>
-                        <span class="form-error" style="height: 20px">
+                        <span class="form-error">
                             <% if (typeof data.error.take_time !== "undefined") { %>
                                 <%= data.error.take_time %>
                             <% } %>
@@ -100,7 +103,7 @@
                             <% if (typeof data.old.starts_date !== "undefined") { %> value="<%= data.old.starts_date %>"
                                     <% } %>
                             >
-                            <span class="form-error" style="height: 20px">
+                            <span class="form-error">
                                 <% if (typeof data.error.starts_date !== "undefined") { %>
                                     <%= data.error.starts_date %>
                                 <% } %>
@@ -114,7 +117,7 @@
                             <% } else { %>
                                    value="1"
                                     <% } %>>
-                            <span class="form-error" style="height: 20px">
+                            <span class="form-error">
                                 <% if (typeof data.error.period !== "undefined") { %>
                                     <%= data.error.period %>
                                 <% } %>
@@ -125,15 +128,15 @@
                         <label>種類 *</label>
                         <select class="form-control select2" name="medicine_type" required>
                             <% if (typeof data.meta.medicine_type != "undefined") {
-                            for (var mt = 0; mt < data.meta.medicine_type.length; mt++) { %>
-                                <option value="<%= data.meta.medicine_type[mt]['type_id'] %>"
-                                <% if (typeof data.old.type_id != "undefined" && data.old.type_id == data.meta.medicine_type[mt]['type_id']) { %> selected <% } %>>
+                                for (var mt = 0; mt < data.meta.medicine_type.length; mt++) { %>
+                                    <option value="<%= data.meta.medicine_type[mt]['type_id'] %>"
+                                    <% if (typeof data.old.type_id != "undefined" && data.old.type_id == data.meta.medicine_type[mt]['type_id']) { %> selected <% } %>>
                                     <%= data.meta.medicine_type[mt]['type_name'] %>
                                 </option>
-                            <% }
+                                <% }
                             } %>
                         </select>
-                        <span class="form-error" style="height: 20px">
+                        <span class="form-error">
                             <% if (typeof data.error.medicine_type !== "undefined") { %>
                                 <%= data.error.medicine_type %>
                             <% } %>
@@ -143,17 +146,17 @@
                         <label>グループ *</label>
                         <select class="form-control select2" name="group_id" required>
                             <% if (typeof data.meta.group_list != "undefined") {
-                            for (var gl = 0; gl < data.meta.group_list.length; gl++) {
-                            %>
-                                <option value="<%= data.meta.group_list[gl]['group_id'] %>"
-                                <% if (typeof data.old.group_id !== "undefined" && data.old.group_id == data.meta.group_list[gl]['group_id']) { %> selected <% } %>>
-                                    <%= data.meta.group_list [gl]['group_name'] %>
-                                </option>
-                            <%
-                            }
+                                for (var gl = 0; gl < data.meta.group_list.length; gl++) {
+                                %>
+                                    <option value="<%= data.meta.group_list[gl]['group_id'] %>"
+                                    <% if (typeof data.old.group_id !== "undefined" && data.old.group_id == data.meta.group_list[gl]['group_id']) { %> selected <% } %>>
+                                        <%= data.meta.group_list [gl]['group_name'] %>
+                                    </option>
+                                <%
+                                }
                             } %>
                         </select>
-                        <span class="form-error" style="height: 20px">
+                        <span class="form-error">
                             <% if (typeof data.error.group_id !== "undefined") { %>
                                 <%= data.error.group_id %>
                             <% } %>
