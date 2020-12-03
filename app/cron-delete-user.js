@@ -32,6 +32,9 @@ module.exports = cron.schedule('0 0 0 * * *', async () => {
         sql = 'DELETE FROM user_message WHERE user_id = ?';
         await connection.query(sql, [userId]);
 
+        sql = 'DELETE FROM user_login_pc WHERE user_id = ?';
+        await connection.query(sql, [userId]);
+
         sql = 'DELETE FROM session WHERE user_id = ?';
         await connection.query(sql, [userId]);
 
