@@ -15,6 +15,7 @@
     "@line/bot-sdk": "^7.0.0",
     "@maxmind/geoip2-node": "^2.0.1",
     "bcrypt": "^5.0.0",
+    "cac": "^6.6.1",
     "dateformat": "^4.0.0",
     "handlebars": "^4.7.6",
     "jaro-winkler": "^0.2.8",
