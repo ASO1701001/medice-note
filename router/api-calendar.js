@@ -66,8 +66,8 @@ router.get('/api/calendar', async (ctx) => {
                 WHERE group_id IN (SELECT group_id FROM medicine_group WHERE user_id = ?)
                   AND (DATE_FORMAT(starts_date, '%Y-%m-%d') BETWEEN ? AND ?
                     OR DATE_FORMAT(DATE_ADD(starts_date, INTERVAL period DAY), '%Y-%m-01') BETWEEN ? AND ?)`;
-
             [calendar] = await connection.query(sql, [userId, start, end, start, end]);
+
             break;
     }
 
