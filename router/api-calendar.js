@@ -36,19 +36,42 @@ router.get('/api/calendar', async (ctx) => {
         }
     }
 
-    let sql = `
-        SELECT medicine_name                                                       as title,
-               DATE_FORMAT(starts_date, '%Y-%m-%d')                                as start,
-               DATE_FORMAT(DATE_ADD(starts_date, INTERVAL period DAY), '%Y-%m-%d') as end,
-               CONCAT('/medicine/', medicine_id)                                   as url
-        FROM medicine
-        WHERE group_id IN (SELECT group_id FROM medicine_group WHERE user_id = ?)
-          AND (DATE_FORMAT(starts_date, '%Y-%m-%d') BETWEEN ? AND ?
-            OR DATE_FORMAT(DATE_ADD(starts_date, INTERVAL period DAY), '%Y-%m-1') BETWEEN ? AND ?)`;
+    let sql, calendar;
 
-    let [calendar] = await connection.query(sql, [userId, start, end, start, end]);
+    let order = ctx.request.query['order'];
+    switch (order) {
+        case 'hospital-name':
+            sql = `
+                SELECT hospital_name                                                    as title,
+                       DATE_FORMAT(starts_date, '%Y-%m-%d')                             as start,
+                       DATE_FORMAT(starts_date, '%Y-%m-%d')                             as end,
+                       GROUP_CONCAT(medicine_name, ' (', number, '個)' SEPARATOR '<br>') as description
+                FROM medicine
+                WHERE group_id IN (SELECT group_id FROM medicine_group WHERE user_id = ?)
+                  AND (DATE_FORMAT(starts_date, '%Y-%m-%d') BETWEEN ? AND ?
+                    OR DATE_FORMAT(starts_date, '%Y-%m-01') BETWEEN ? AND ?)
+                GROUP BY hospital_name, start
+                ORDER BY start`;
+            [calendar] = await connection.query(sql, [userId, start, end, start, end]);
+
+            break;
+        default:
+            sql = `
+                SELECT medicine_name                                                       as title,
+                       DATE_FORMAT(starts_date, '%Y-%m-%d')                                as start,
+                       DATE_FORMAT(DATE_ADD(starts_date, INTERVAL period DAY), '%Y-%m-%d') as end,
+                       CONCAT('/medicine/', medicine_id)                                   as url,
+                       hospital_name                                                       as description
+                FROM medicine
+                WHERE group_id IN (SELECT group_id FROM medicine_group WHERE user_id = ?)
+                  AND (DATE_FORMAT(starts_date, '%Y-%m-%d') BETWEEN ? AND ?
+                    OR DATE_FORMAT(DATE_ADD(starts_date, INTERVAL period DAY), '%Y-%m-01') BETWEEN ? AND ?)`;
+            [calendar] = await connection.query(sql, [userId, start, end, start, end]);
+
+            break;
+    }
 
     return ctx.body = calendar;
-})
+});
 
 module.exports = router;
