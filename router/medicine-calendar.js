@@ -20,11 +20,13 @@ router.get('/medicine-calendar', async (ctx) => {
     result['data']['meta']['site_title'] = 'お薬カレンダー - Medice Note';
     result['data']['meta']['group_list'] = await app.getGroupList(userId);
     result['data']['meta']['css'] = [
-        '/stisla/modules/fullcalendar/fullcalendar.min.css'
+        '/stisla/modules/fullcalendar/fullcalendar.min.css',
+        '/stisla/modules/bootstrap-daterangepicker/daterangepicker.css'
     ];
     result['data']['meta']['script'] = [
         '/stisla/modules/fullcalendar/fullcalendar.min.js',
         '/stisla/modules/fullcalendar/locale/ja.js',
+        '/stisla/modules/bootstrap-daterangepicker/daterangepicker.js',
         '/js/medicine-calendar.js'
     ];
 
