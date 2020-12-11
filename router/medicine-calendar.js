@@ -27,6 +27,7 @@ router.get('/medicine-calendar', async (ctx) => {
         '/stisla/modules/fullcalendar/fullcalendar.min.js',
         '/stisla/modules/fullcalendar/locale/ja.js',
         '/stisla/modules/bootstrap-daterangepicker/daterangepicker.js',
+        '/js/library/handlebars.min.js',
         '/js/medicine-calendar.js'
     ];
 

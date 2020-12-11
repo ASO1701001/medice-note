@@ -74,4 +74,72 @@ router.get('/api/calendar', async (ctx) => {
     return ctx.body = calendar;
 });
 
+router.post('/api/calendar-plan/add', async (ctx) => {
+    let session = ctx.session;
+
+    let authKey = session.auth_id;
+    let userId = await app.getUserId(authKey);
+    if (!userId) {
+        return ctx.body = {
+            status: false,
+            message: 'SESSION_ERROR'
+        };
+    }
+
+    let planTitle = ctx.request.body['plan_title'];
+    let planDate = ctx.request.body['plan_date'];
+    let planDescription = ctx.request.body['plan_description'];
+    let planNotice = ctx.request.body['plan_notice'] === 'true';
+
+    let validation = new validator({
+        plan_title: planTitle,
+        plan_date: planDate,
+        plan_description: planDescription,
+        plan_notice: planNotice
+    }, {
+        plan_title: 'required|min:1|max:50',
+        plan_date: 'required|date',
+        plan_description: 'max:300',
+        plan_notice: 'required|boolean'
+    });
+
+    validation.checkAsync(() => {
+        let sql = 'INSERT INTO calendar_plan (user_id, plan_date, plan_description, plan_notice) VALUES (?, ?, ?, ?)';
+        connection.query(sql, [userId, planDate, planDescription, planNotice]);
+
+        return ctx.body = {
+            status: true
+        };
+    }, () => {
+        let error = {};
+
+        if (validation.errors.first('plan_title')) {
+            error['plan_title'] = '1文字以上30文字以下で入力してください';
+        }
+        if (validation.errors.first('plan_date')) {
+            error['plan_date'] = '日付を入力してください';
+        }
+        if (validation.errors.first('plan_description')) {
+            error['plan_description'] = '300文字以下で入力してください';
+        }
+        if (validation.errors.first('plan_notice')) {
+            error['plan_notice'] = '不明なエラー'
+        }
+
+        return ctx.body = {
+            status: false,
+            message: 'VALIDATION_ERROR',
+            error: error
+        };
+    });
+});
+
+router.post('/api/calendar-plan/edit', async (ctx) => {
+
+});
+
+router.post('/api/calendar-plan/delete', async (ctx) => {
+
+});
+
 module.exports = router;
