@@ -51,6 +51,7 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, '/private/clou
 // Cron
 require('./app/cron-push-message');
 require('./app/cron-verify-line-access-token');
+require('./app/cron-notice-plan');
 require('./app/cron-delete-user');
 
 const indexRouter = require('./router/index');
