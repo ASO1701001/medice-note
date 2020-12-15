@@ -138,6 +138,7 @@ const planAdd = () => {
 
             $('#modal-plan-add').modal('hide');
         } else {
+            modal.find('.alert').addClass('d-none');
             modal.find('input[name=plan_title]').parents('.form-group').find('.form-error').text('');
             modal.find('input[name=plan_date]').parents('.form-group').find('.form-error').text('');
             modal.find('textarea[name=plan_description]').parents('.form-group').find('.form-error').text('');
@@ -145,7 +146,8 @@ const planAdd = () => {
 
             switch (response.message) {
                 case 'SESSION_ERROR':
-                    modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('不明なエラー');
+                    modal.find('.alert .alert-body .alert-text').text('不明なエラー');
+                    modal.find('.alert').removeClass('d-none');
                     break;
                 case 'VALIDATION_ERROR':
                     let error = response.error;
@@ -158,7 +160,9 @@ const planAdd = () => {
             }
         }
     }).fail(() => {
-        modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('通信に失敗しました');
+        modal.find('.alert').addClass('d-none');
+        modal.find('.alert .alert-body .alert-text').text('不明なエラー');
+        modal.find('.alert').removeClass('d-none');
     });
 };
 
@@ -194,6 +198,7 @@ const planEdit = () => {
             modal.modal('hide');
             notyf.success('予定を編集しました');
         } else {
+            modal.find('.alert').addClass('d-none');
             modal.find('input[name=plan_title]').parents('.form-group').find('.form-error').text('');
             modal.find('input[name=plan_date]').parents('.form-group').find('.form-error').text('');
             modal.find('textarea[name=plan_description]').parents('.form-group').find('.form-error').text('');
@@ -201,10 +206,12 @@ const planEdit = () => {
 
             switch (response.message) {
                 case 'SESSION_ERROR':
-                    modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('不明なエラー');
+                    modal.find('.alert .alert-body .alert-text').text('不明なエラー');
+                    modal.find('.alert').removeClass('d-none');
                     break;
                 case 'DATA_NOTFOUND':
-                    modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('データが見つかりませんでした');
+                    modal.find('.alert .alert-body .alert-text').text('データが見つかりませんでした');
+                    modal.find('.alert').removeClass('d-none');
                     break;
                 case 'VALIDATION_ERROR':
                     let error = response.error;
@@ -217,7 +224,9 @@ const planEdit = () => {
             }
         }
     }).fail(() => {
-        modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('通信に失敗しました');
+        modal.find('.alert').addClass('d-none');
+        modal.find('.alert .alert-body .alert-text').text('通信に失敗しました');
+        modal.find('.alert').removeClass('d-none');
     });
 };
 
