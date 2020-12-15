@@ -58,8 +58,8 @@
                         <span class="form-error"></span>
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input class="custom-control-input" id="is-notice" name="plan_notice" type="checkbox" value="yes">
-                        <label class="custom-control-label" for="is-notice">LINEで通知</label>
+                        <input class="custom-control-input" id="modal-plan-add-is-notice" name="plan_notice" type="checkbox" value="yes">
+                        <label class="custom-control-label" for="modal-plan-add-is-notice">LINEで通知</label>
                         <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title=""
                            data-original-title="LINE連携をしている場合、午前7時に当日の予定をお知らせします"></i>
                         <span class="form-error"></span>
@@ -68,6 +68,52 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
                     <button type="button" class="btn btn-primary" onclick="planAdd()">追加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="modal-plan-edit-layout">
+    <div class="modal fade" id="modal-plan-edit" tabindex="-1" role="dialog" aria-labelledby="modal-title-plan-edit"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title-plan-edit">予定編集</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="plan_id" required>
+                    <div class="form-group mb-3">
+                        <label>タイトル</label>
+                        <input type="text" class="form-control" name="plan_title" required>
+                        <span class="form-error"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>日付</label>
+                        <input type="text" class="form-control datepicker" name="plan_date" required readonly>
+                        <span class="form-error"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>詳細</label>
+                        <textarea class="form-control" name="plan_description"></textarea>
+                        <span class="form-error"></span>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="modal-plan-edit-is-notice" name="plan_notice" type="checkbox" value="yes">
+                        <label class="custom-control-label" for="modal-plan-edit-is-notice">LINEで通知</label>
+                        <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title=""
+                           data-original-title="LINE連携をしている場合、午前7時に当日の予定をお知らせします"></i>
+                        <span class="form-error"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" onclick="planDelete()">削除</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-primary" onclick="planEdit()">編集</button>
                 </div>
             </div>
         </div>
