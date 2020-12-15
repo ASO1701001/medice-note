@@ -1,3 +1,40 @@
+<% if (typeof data.ga !== 'undefined') { %>
+    <% if (data.ga.flow === 'AuthMail') { %>
+        <% if (data.ga.result) { %>
+            <script>gtag('event', 'AuthMail', {
+                    'event_category': 'Account',
+                    'event_label': '/AuthMail - Success'
+                })</script>
+        <% } else { %>
+            <script>gtag('event', 'AuthMail', {
+                    'event_category': 'Account',
+                    'event_label': '/AuthMail - False'
+                })</script>
+        <% } %>
+    <% } %>
+    <% if (data.ga.flow === 'tow-factor-authentication-send-mail') { %>
+        <% if (data.ga.result) { %>
+            <script>gtag('event', 'tow-factor-authentication-send-mail', {
+                    'event_category': 'Login',
+                    'event_label': '/tow-factor-authentication-send-mail - Success'
+                })</script>
+        <% } else { %>
+            <script>gtag('event', 'tow-factor-authentication-send-mail', {
+                    'event_category': 'Login',
+                    'event_label': '/tow-factor-authentication-send-mail - False'
+                })</script>
+        <% } %>
+    <% } %>
+    <% if (data.ga.flow === 'tow-factor-authentication') { %>
+        <% if (data.ga.result === false) { %>
+            <script>gtag('event', 'tow-factor-authentication', {
+                    'event_category': 'Login',
+                    'event_label': '/Two-Factor-Authentication - False'
+                })</script>
+        <% } %>
+    <% } %>
+<% } %>
+
 <div class="section-header">
     <h1>ログイン</h1>
 </div>

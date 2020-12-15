@@ -40,6 +40,11 @@ router.get('/signup', async (ctx) => {
         session.error = undefined;
     }
 
+    if (session.ga !== undefined) {
+        result['data']['ga'] = session.ga;
+        session.ga = undefined;
+    }
+
     await ctx.render('signup', result);
 })
 
@@ -117,9 +122,17 @@ router.post('/signup', async (ctx) => {
     }).then(() => {
         session.success.message = '認証メールを送信しました';
 
+        session.ga.flow = '/AuthMailSendMail';
+
+        session.ga.result = true;
+
         return ctx.redirect('/signup');
     }).catch(() => {
         session.error.message = '認証メールの送信に失敗しました';
+
+        session.ga.flow = '/AuthMailSendMail';
+
+        session.ga.result = false;
 
         return ctx.redirect('/signup');
     });

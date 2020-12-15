@@ -1,3 +1,15 @@
+<% if (typeof data.ga !== 'undefined') { %>
+    <% if (data.ga.flow === 'tow-factor-authentication') { %>
+        <% if (data.ga.result) { %>
+            <script>gtag('event', 'Two-Factor-Login', {
+                    'event_category': 'Login',
+                    'event_label': '/Two-Factor-Authentication - Success'
+                })</script>
+            <script>gtag('event', 'Signup', {'event_category': 'Account', 'event_label': '/Signup - Success'})</script>
+        <% } %>
+    <% } %>
+<% } %>
+
 <div class="section-header">
     <h1>薬情報一覧</h1>
 </div>
@@ -238,7 +250,8 @@
         <form class="modal-part" id="modal-setting-layout">
             <p>この設定はブラウザごとに保存されます</p>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="checkboxHospitalName" id="checkboxHospitalName" checked>
+                <input type="checkbox" class="custom-control-input" name="checkboxHospitalName"
+                       id="checkboxHospitalName" checked>
                 <label class="custom-control-label" for="checkboxHospitalName">病院名</label>
             </div>
             <div class="custom-control custom-checkbox">
