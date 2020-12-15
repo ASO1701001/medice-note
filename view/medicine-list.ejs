@@ -1,8 +1,8 @@
 <% if (typeof data.ga !== 'undefined') { %>
-    <% if (data.ga.flow === 'tow-factor-authentication') { %>
+    <% if (data.ga.flow === 'tow_factor_authentication') { %>
         <% if (data.ga.result) { %>
-            <script>gtag('event', 'Two-Factor-Login', {'event_category': 'Login', 'event_label': '/Two-Factor-Authentication - Success'})</script>
-            <script>gtag('event', 'Signup', {'event_category': 'Account', 'event_label': '/Signup - Success'})</script>
+            <script>gtag('event', 'two_factor_login', {'event_category': 'login', 'event_label': '/two_factor_authentication - success'})</script>
+            <script>gtag('event', 'signup', {'event_category': 'account', 'event_label': '/signup - success'})</script>
         <% } %>
     <% } %>
 <% } %>

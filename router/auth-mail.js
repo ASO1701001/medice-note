@@ -14,7 +14,7 @@ router.get('/auth-mail/:auth_key', async (ctx) => {
     let [auth] = await connection.query(sql, [authKey, date]);
     if (auth.length === 0) {
         session.error.message = '認証キーが見つかりませんでした';
-        session.ga.flow = 'AuthMail';
+        session.ga.flow = 'auth_mail';
         session.ga.result = false;
 
         return ctx.redirect('/login');
@@ -28,7 +28,7 @@ router.get('/auth-mail/:auth_key', async (ctx) => {
     await connection.query(sql, [authKey]);
 
     session.success.message = 'メールアドレスを認証しました';
-    session.ga.flow = 'AuthMail';
+    session.ga.flow = 'auth_mail';
     session.ga.result = true;
 
     return ctx.redirect('/login');

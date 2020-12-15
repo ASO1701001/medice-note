@@ -131,13 +131,13 @@ router.post('/login', async (ctx) => {
                 html: html
             }).then(() => {
                 session.success.message = '認証メールを送信しました';
-                session.ga.flow = 'tow-factor-authentication-send-mail';
+                session.ga.flow = 'tow_factor_authentication_send_mail';
                 session.ga.result = true;
 
                 ctx.redirect('/login');
             }).catch(() => {
                 session.error.message = '認証メールの送信に失敗しました';
-                session.ga.flow = 'tow-factor-authentication-send-mail';
+                session.ga.flow = 'tow_factor_authentication_send_mail';
                 session.ga.result = false;
 
                 ctx.redirect('/login');

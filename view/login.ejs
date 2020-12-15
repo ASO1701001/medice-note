@@ -1,21 +1,21 @@
 <% if (typeof data.ga !== 'undefined') { %>
-    <% if (data.ga.flow === 'AuthMail') { %>
+    <% if (data.ga.flow === 'auth_mail') { %>
         <% if (data.ga.result) { %>
-            <script>gtag('event', 'AuthMail', {'event_category': 'Account', 'event_label': '/AuthMail - Success'})</script>
+            <script>gtag('event', 'auth_mail', {'event_category': 'account', 'event_label': '/auth_mail - success'})</script>
         <% } else { %>
-            <script>gtag('event', 'AuthMail', {'event_category': 'Account', 'event_label': '/AuthMail - False'})</script>
+            <script>gtag('event', 'auth_mail', {'event_category': 'account', 'event_label': '/auth_mail - false'})</script>
         <% } %>
     <% } %>
-    <% if (data.ga.flow === 'tow-factor-authentication-send-mail') { %>
+    <% if (data.ga.flow === 'tow_factor_authentication_send_mail') { %>
         <% if (data.ga.result) { %>
-            <script>gtag('event', 'Two-Factor-Login', {'event_category': 'Login', 'event_label': '/tow-factor-authentication-send-mail - Success'})</script>
+            <script>gtag('event', 'two_factor_login', {'event_category': 'login', 'event_label': '/tow_factor_authentication_send_mail - success'})</script>
         <% } else { %>
-            <script>gtag('event', 'Two-Factor-Login', {'event_category': 'Login', 'event_label': '/tow-factor-authentication-send-mail - False'})</script>
+            <script>gtag('event', 'two_factor_login', {'event_category': 'login', 'event_label': '/tow_factor_authentication_send_mail - false'})</script>
         <% } %>
     <% } %>
-    <% if (data.ga.flow === 'tow-factor-authentication') { %>
+    <% if (data.ga.flow === 'tow_factor_authentication') { %>
         <% if (data.ga.result === false) { %>
-            <script>gtag('event', 'Two-Factor-Login', {'event_category': 'Login', 'event_label': '/Two-Factor-Authentication - False'})</script>
+            <script>gtag('event', 'two_factor_login', {'event_category': 'login', 'event_label': '/two_factor_authentication - false'})</script>
         <% } %>
     <% } %>
 <% } %>
