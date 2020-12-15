@@ -42,23 +42,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label>タイトル</label>
                         <input type="text" class="form-control" name="plan_title" required>
+                        <span class="form-error"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label>日付</label>
                         <input type="text" class="form-control datepicker" name="plan_date" required readonly>
+                        <span class="form-error"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label>詳細</label>
                         <textarea class="form-control" name="plan_description"></textarea>
+                        <span class="form-error"></span>
                     </div>
-                    <div class="custom-control custom-checkbox">
+                    <div class="custom-control custom-checkbox mb-3">
                         <input class="custom-control-input" id="is-notice" name="plan_notice" type="checkbox" value="yes">
                         <label class="custom-control-label" for="is-notice">LINEで通知</label>
                         <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title=""
                            data-original-title="LINE連携をしている場合、午前7時に当日の予定をお知らせします"></i>
+                        <span class="form-error"></span>
                     </div>
                 </div>
                 <div class="modal-footer">

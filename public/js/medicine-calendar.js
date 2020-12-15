@@ -10,7 +10,21 @@ $(() => {
             center: 'title',
             right: 'buttonMedicineName,buttonHospitalName'
         },
-        events: '/api/calendar',
+        eventSources: [
+            {
+                url: '/api/calendar',
+                data: {
+                    order: 'medicine-name'
+                }
+            },
+            {
+                url: '/api/calendar',
+                data: {
+                    order: 'plan'
+                },
+                color: '#2e856e'
+            }
+        ],
         eventColor: '#4285F4',
         eventTextColor: '#fff',
         eventRender: (event, el) => {
@@ -25,9 +39,14 @@ $(() => {
         },
         dayClick: function (date) {
             let modal = $('#modal-plan-add');
-            let planTitle = modal.find('input[name=plan_title]').val('');
-            let planDescription = modal.find('textarea[name=plan_description]').val('');
-            let planNotice = modal.find('input[name=plan_notice]').prop('checked', false);
+            modal.find('input[name=plan_title]').val('');
+            modal.find('input[name=plan_title]').parents('.form-group').find('.form-error').text('');
+            modal.find('input[name=plan_date]').val(date.format());
+            modal.find('input[name=plan_date]').parents('.form-group').find('.form-error').text('');
+            modal.find('textarea[name=plan_description]').val('');
+            modal.find('textarea[name=plan_description]').parents('.form-group').find('.form-error').text('');
+            modal.find('input[name=plan_notice]').prop('checked', false);
+            modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('');
             modal.modal('show');
         },
         customButtons: {
@@ -42,6 +61,13 @@ $(() => {
                             order: 'medicine-name'
                         }
                     });
+                    calendar.fullCalendar('addEventSource', {
+                        url: '/api/calendar',
+                        data: {
+                            order: 'plan'
+                        },
+                        color: '#2e856e'
+                    });
                     calendar.fullCalendar('refetchEvents');
                 }
             },
@@ -55,6 +81,13 @@ $(() => {
                         data: {
                             order: 'hospital-name'
                         }
+                    });
+                    calendar.fullCalendar('addEventSource', {
+                        url: '/api/calendar',
+                        data: {
+                            order: 'plan'
+                        },
+                        color: '#2e856e'
                     });
                     calendar.fullCalendar('refetchEvents');
                 }
@@ -80,11 +113,33 @@ const planAdd = () => {
             plan_notice: planNotice
         }
     }).done(function (response) {
+        if (response.status) {
+            let calendar = $('#medicine-calendar');
+            calendar.fullCalendar('refetchEvents');
 
+            $('#modal-plan-add').modal('hide');
+        } else {
+            modal.find('input[name=plan_title]').parents('.form-group').find('.form-error').text('');
+            modal.find('input[name=plan_date]').parents('.form-group').find('.form-error').text('');
+            modal.find('textarea[name=plan_description]').parents('.form-group').find('.form-error').text('');
+            modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('');
+
+            switch (response.message) {
+                case 'SESSION_ERROR':
+                    modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('不明なエラー');
+                    break;
+                case 'VALIDATION_ERROR':
+                    let error = response.error;
+
+                    modal.find('input[name=plan_title]').parents('.form-group').find('.form-error').text(error['plan_title']);
+                    modal.find('input[name=plan_date]').parents('.form-group').find('.form-error').text(error['plan_date']);
+                    modal.find('textarea[name=plan_description]').parents('.form-group').find('.form-error').text(error['plan_description']);
+                    modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text(error['plan_notice']);
+                    break;
+            }
+        }
     }).fail(function () {
-
-    }).always(function () {
-
+        modal.find('input[name=plan_notice]').parents('.form-group').find('.form-error').text('通信に失敗しました');
     });
 };
 

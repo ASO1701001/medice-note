@@ -40,6 +40,20 @@ router.get('/api/calendar', async (ctx) => {
 
     let order = ctx.request.query['order'];
     switch (order) {
+        case 'plan':
+            sql = `
+                SELECT plan_title                         as title,
+                       DATE_FORMAT(plan_date, '%Y-%m-%d') as start,
+                       DATE_FORMAT(plan_date, '%Y-%m-%d') as end,
+                       plan_description                   as description
+                FROM calendar_plan
+                WHERE user_id = 1
+                  AND (DATE_FORMAT(plan_date, '%Y-%m-%d') BETWEEN '2020-11-29' AND '2021-01-10'
+                    OR DATE_FORMAT(plan_date, '%Y-%m-01') BETWEEN '2020-11-29' AND '2021-01-01')
+                ORDER BY start`;
+            [calendar] = await connection.query(sql, []);
+
+            break;
         case 'hospital-name':
             sql = `
                 SELECT hospital_name                                                    as title,
@@ -104,8 +118,8 @@ router.post('/api/calendar-plan/add', async (ctx) => {
     });
 
     validation.checkAsync(() => {
-        let sql = 'INSERT INTO calendar_plan (user_id, plan_date, plan_description, plan_notice) VALUES (?, ?, ?, ?)';
-        connection.query(sql, [userId, planDate, planDescription, planNotice]);
+        let sql = 'INSERT INTO calendar_plan (user_id, plan_title, plan_date, plan_description, plan_notice) VALUES (?, ?, ?, ?, ?)';
+        connection.query(sql, [userId, planTitle, planDate, planDescription, planNotice]);
 
         return ctx.body = {
             status: true
