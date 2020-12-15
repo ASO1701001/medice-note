@@ -1,23 +1,14 @@
 <% if (typeof data.error !== 'undefined') { %>
     <% for(var row in data.error) { %>
-        <script>gtag('event', 'Signup', {
-                'event_category': 'Account',
-                'event_label': '/Signup - False - <%= row %>'
-            })</script>
+        <script>gtag('event', 'Signup', {'event_category': 'Account', 'event_label': '/Signup - False - <%= row %>'})</script>
     <% } %>
 <% } %>
 <% if (typeof data.ga.flow !== 'undefined') { %>
     <% if (data.ga.flow === '/AuthMailSendMail') { %>
         <% if (data.ga.result) { %>
-            <script>gtag('event', 'AuthMail', {
-                    'event_category': 'Account',
-                    'event_label': '/AuthMailSendMail - Success'
-                })</script>
+            <script>gtag('event', 'AuthMail', {'event_category': 'Account', 'event_label': '/AuthMailSendMail - Success'})</script>
         <% } else { %>
-            <script>gtag('event', 'AuthMail', {
-                    'event_category': 'Account',
-                    'event_label': '/AuthMailSendMail - False'
-                })</script>
+            <script>gtag('event', 'AuthMail', {'event_category': 'Account', 'event_label': '/AuthMailSendMail - False'})</script>
         <% } %>
     <% } else { %>
 
