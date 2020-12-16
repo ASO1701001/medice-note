@@ -1,3 +1,14 @@
+<% if (typeof data.ga !== 'undefined') { %>
+    <% if (data.ga.flow === 'tow_factor_authentication') { %>
+        <% if (data.ga.result) { %>
+            <script>
+                gtag('event', 'two_factor_login', {'event_category': 'login', 'event_label': '/two_factor_authentication - success'})
+                gtag('event', 'signup', {'event_category': 'account', 'event_label': '/signup - success'})
+            </script>
+        <% } %>
+    <% } %>
+<% } %>
+
 <div class="section-header">
     <h1>薬情報一覧</h1>
 </div>

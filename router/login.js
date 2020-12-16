@@ -42,6 +42,11 @@ router.get('/login', async (ctx) => {
         session.error = undefined;
     }
 
+    if (session.ga !== undefined) {
+        result['data']['ga'] = session.ga;
+        session.ga = undefined;
+    }
+
     await ctx.render('login', result);
 })
 
@@ -54,7 +59,7 @@ router.post('/login', async (ctx) => {
     let skipTwoFactorCheck = ctx.request.body['skip_two_factor_check'] === 'yes';
 
     let ua = ctx.request.headers['user-agent'];
-    let ip =  ctx.request.ip;
+    let ip = ctx.request.ip;
 
     // Login Log
     let sql = 'INSERT INTO user_login_log (mail, user_agent, ip_address, login_at) VALUES (?, ?, ?, ?)';
@@ -92,8 +97,9 @@ router.post('/login', async (ctx) => {
                 await connection.query(sql, [userId, sessionId]);
 
                 session.auth_id = sessionId;
-
                 session.success.message = 'ログインしました';
+                session.ga.flow = 'login';
+                session.ga.result = true;
 
                 return ctx.redirect('/');
             } else if (skipTwoFactorCheck) {
@@ -125,10 +131,14 @@ router.post('/login', async (ctx) => {
                 html: html
             }).then(() => {
                 session.success.message = '認証メールを送信しました';
+                session.ga.flow = 'tow_factor_authentication_send_mail';
+                session.ga.result = true;
 
                 ctx.redirect('/login');
             }).catch(() => {
                 session.error.message = '認証メールの送信に失敗しました';
+                session.ga.flow = 'tow_factor_authentication_send_mail';
+                session.ga.result = false;
 
                 ctx.redirect('/login');
             });
