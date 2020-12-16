@@ -4,7 +4,7 @@
     <% } %>
 <% } %>
 <% if (typeof data.ga.flow !== 'undefined') { %>
-    <% if (data.ga.flow === '/auth_mail_send_mail') { %>
+    <% if (data.ga.flow === 'auth_mail_send_mail') { %>
         <% if (data.ga.result) { %>
             <script>gtag('event', 'auth_mail', {'event_category': 'account', 'event_label': '/auth_mail_send_mail - success'})</script>
         <% } else { %>
