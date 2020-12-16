@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <link rel="stylesheet" type="text/css" href="/lp/lp.css">
     <meta charset="UTF-8">
     <title>Medice-note LP</title>
     <script>
         function onMouseDown(buttonNum) {
-            gtag('event', 'click', {'event_category': 'button', 'event_label': `/lp - button${buttonNum}`});
+            gtag('event', 'click', {
+                'event_category': 'button',
+                'event_label': `/lp - button${buttonNum}`
+            });
         }
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171420901-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
@@ -21,13 +26,13 @@
         gtag('config', 'UA-171420901-1');
     </script>
 </head>
+
 <body>
     <header class="site-header">
         <div align="right">
             <a href="https://www.medice-note.vxx0.com/signup" onmousedown="onMouseDown(1)" class="simple_square_btn5">登録はこちらから！</a>
         </div>
     </header>
-
     <div class="p1">
         WEBで薬を簡単管理!
     </div>
@@ -78,16 +83,14 @@
             このほかにもMedice-Noteには <br>
             たくさんの便利な機能があります！
         </div>
-
     </div>
-
     <div class="p4">
         Medice-Noteはこんな人に <br>
         オススメ!
     </div>
     <br>
     <div class="main">
-        <div class="balloon1" align="center" >
+        <div class="balloon1" align="center">
             家族の薬をまとめて管理したい方
         </div>
         <img src="/image/lp/group_family_asia.png" width="340" height="250">
@@ -118,4 +121,5 @@
         <a href="https://www.medice-note.vxx0.com/signup" onmousedown="onMouseDown(2)" class="simple_square_btn6">今すぐ登録！</a>
     </div>
 </body>
+
 </html>
