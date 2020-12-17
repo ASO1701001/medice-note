@@ -175,6 +175,9 @@ module.exports = {
         if (session.old === undefined) {
             session.old = {};
         }
+        if (session.ga === undefined) {
+            session.ga = {};
+        }
     },
     validationGroupId: async (groupId, userId) => {
         let sql = 'SELECT group_id FROM medicine_group WHERE group_id = ? AND user_id = ?';
