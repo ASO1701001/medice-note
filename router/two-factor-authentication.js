@@ -18,6 +18,8 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     let [auth] = await connection.query(sql, [authKey]);
     if (auth.length === 0) {
         session.error.message = '認証キーが見つかりませんでした';
+        session.ga.flow = 'tow_factor_authentication';
+        session.ga.result = false;
 
         return ctx.redirect('/login');
     }
@@ -37,8 +39,9 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     }
 
     session.auth_id = sessionId;
-
     session.success.message = 'ログインしました';
+    session.ga.flow = 'tow_factor_authentication';
+    session.ga.result = true;
 
     return ctx.redirect('/');
 });
