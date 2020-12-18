@@ -61,6 +61,7 @@ router.get('/', async (ctx) => {
         result['data']['meta']['css'] = [
             '/css/library/notyf.min.css'
         ];
+        result['data']['meta']['section_header'] = `薬情報一覧`;
 
         sql = `
             SELECT medicine_id, medicine_name, hospital_name, number, date_format(starts_date, '%Y年%m月%d日') as starts_date, period,

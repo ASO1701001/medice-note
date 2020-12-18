@@ -103,6 +103,10 @@ const medicineRouter = require('./router/medicine');
 app.use(medicineRouter.routes());
 app.use(medicineRouter.allowedMethods());
 
+const searchRouter = require('./router/search');
+app.use(searchRouter.routes());
+app.use(searchRouter.allowedMethods());
+
 const medicineRegisterRouter = require('./router/medicine-register');
 app.use(medicineRegisterRouter.routes());
 app.use(medicineRegisterRouter.allowedMethods());
