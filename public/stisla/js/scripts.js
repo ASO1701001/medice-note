@@ -58,7 +58,7 @@ $(function() {
   }, now_layout_class = null;
 
   var sidebar_sticky = function() {
-    if($("body").hasClass('layout-2')) {    
+    if($("body").hasClass('layout-2')) {
       $("body.layout-2 #sidebar-wrapper").stick_in_parent({
         parent: $('body')
       });
@@ -256,7 +256,7 @@ $(function() {
         nav_second.find('.sidebar-brand').remove();
         nav_second.removeAttr('class');
         nav_second.addClass(nav_second_classes);
-  
+
         let main_sidebar = $(".navbar-secondary");
         main_sidebar.find('.sidebar-wrapper').addClass('container').removeClass('sidebar-wrapper');
         main_sidebar.find('.sidebar-menu').addClass('navbar-nav').removeClass('sidebar-menu');
@@ -328,7 +328,7 @@ $(function() {
     });
   });
 
-  if($(".chat-content").length) { 
+  if($(".chat-content").length) {
     $(".chat-content").niceScroll({
         cursoropacitymin: .3,
         cursoropacitymax: .8,
@@ -336,7 +336,7 @@ $(function() {
     $('.chat-content').getNiceScroll(0).doScrollTop($('.chat-content').height());
   }
 
-  if(jQuery().summernote) {   
+  if(jQuery().summernote) {
     $(".summernote").summernote({
        dialogsInBody: true,
       minHeight: 250,
@@ -438,7 +438,7 @@ $(function() {
       backgroundImage: 'url("'+ me.data('image') +'")'
     });
   });
-  if(jQuery().Chocolat) { 
+  if(jQuery().Chocolat) {
     $(".gallery").Chocolat({
       className: 'gallery',
       imageSelector: '.gallery-item',
@@ -525,7 +525,7 @@ $(function() {
       width: $(this).data('width')
     });
   });
-  
+
   // Height attribute
   $('[data-height]').each(function() {
     $(this).css({
@@ -551,15 +551,15 @@ $(function() {
   if(jQuery().daterangepicker) {
     if($(".datepicker").length) {
       $('.datepicker').daterangepicker({
-        "singleDatePicker": true,
-        "autoApply": true,
-        "locale": {
-          "format": "YYYY-MM-DD",
-          "separator": " - ",
-          "customRangeLabel": "Custom",
-          "daysOfWeek": ["日", "月", "火", "水", "木", "金", "土"],
-          "monthNames": ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
-          "firstDay": 1
+        singleDatePicker: true,
+        autoApply: true,
+        locale: {
+          format: "YYYY-MM-DD",
+          separator: " - ",
+          customRangeLabel: "Custom",
+          daysOfWeek: ["日", "月", "火", "水", "木", "金", "土"],
+          monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+          firstDay: 1
         }
       });
     }
@@ -586,7 +586,9 @@ $(function() {
       icons: {
         up: 'fas fa-chevron-up',
         down: 'fas fa-chevron-down'
-      }
+      },
+      minuteStep: 10,
+      showMeridian: false
     });
   }
 });

@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">通知終了日付 *</label>
-                        <input type="text" class="form-control datepicker readonly-background" readonly name="end_date" <% if (typeof data.old.end_date !== "undefined") { %> value="<%= data.old.end_date %>" <% } %> required>
+                        <input type="text" class="form-control datepicker" readonly name="end_date" <% if (typeof data.old.end_date !== "undefined") { %> value="<%= data.old.end_date %>" <% } %> required>
                         <span class="form-error">
                             <% if (typeof data.error.end_date !== "undefined") { %>
                                 <%= data.error.end_date %>
