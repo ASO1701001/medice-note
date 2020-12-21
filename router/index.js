@@ -106,6 +106,11 @@ router.get('/', async (ctx) => {
             session.error = undefined;
         }
 
+        if (session.ga !== undefined) {
+            result['data']['ga'] = session.ga;
+            session.ga = undefined;
+        }
+
         await ctx.render('medicine-list', result);
     } else {
         result['data']['meta']['login_status'] = false;
