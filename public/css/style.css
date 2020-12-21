@@ -30,10 +30,10 @@ span.select2.select2-container.select2-container--default {
     border-radius: .25rem;
     padding-left: 10px;
 }
-input.form-control-plaintext {
+.form-control-plaintext {
     pointer-events: none;
 }
-.readonly-background {
+.form-control[readonly] {
     background-color: #fdfdff !important;
 }
 .accordion-header[aria-expanded=true] h4:before {
@@ -210,4 +210,9 @@ tr:first-child > td > .fc-day-grid-event {
     margin-top: 10px;
     margin-bottom: 10px;
     color: #6777ef;
+}
+
+/* bootstrap-timepicker */
+.bootstrap-timepicker-widget input {
+    border: 1px solid #808080 !important;
 }
