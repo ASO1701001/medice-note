@@ -3,7 +3,7 @@ const router = new Router();
 const app = require('../app/app');
 const connection = require('../app/db');
 
-router.get('/group/:group_id', async (ctx) => {
+router.get('/search', async (ctx) => {
     let session = ctx.session;
     app.initializeSession(session);
 
@@ -15,15 +15,12 @@ router.get('/group/:group_id', async (ctx) => {
         return ctx.redirect('/login');
     }
 
-    let groupId = ctx.params['group_id'];
-    if (!await app.validationGroupId(groupId, userId)) {
-        session.error = 'グループ情報が見つかりませんでした';
+    let keyword = ctx.request.query['keyword'];
+    if (keyword === '') {
+        session.error.message = 'キーワードを入力してください';
 
         return ctx.redirect('/');
     }
-    let sql = 'SELECT group_name FROM medicine_group WHERE group_id = ?';
-    let [group] = await connection.query(sql, [groupId]);
-    let groupName = group[0]['group_name'];
 
     let result = app.initializeRenderResult();
     result['data']['meta']['login_status'] = true;
@@ -40,32 +37,31 @@ router.get('/group/:group_id', async (ctx) => {
     result['data']['meta']['css'] = [
         '/css/library/notyf.min.css'
     ];
-    result['data']['meta']['section_header'] = `薬情報一覧 - ${groupName}`;
+    result['data']['meta']['section_header'] = `検索結果 - ${keyword}`;
 
-    sql = `
-        SELECT medicine_id, medicine_name, hospital_name, number, date_format(starts_date, '%Y年%m月%d日') as starts_date, period,
-               medicine_type.type_name, image, description, medicine.group_id, medicine_group.group_name
+    let sql = `
+        SELECT medicine.medicine_id,
+               medicine_name,
+               hospital_name,
+               number,
+               date_format(starts_date, '%Y年%m月%d日')           as starts_date,
+               period,
+               mt.type_name,
+               image,
+               description,
+               medicine.group_id,
+               mg.group_name,
+               GROUP_CONCAT(tt.take_time_name SEPARATOR ' ・ ') as take_time_name
         FROM medicine
-        LEFT JOIN medicine_type ON medicine.type_id = medicine_type.type_id
-        LEFT JOIN medicine_group ON medicine.group_id = medicine_group.group_id
-        WHERE medicine.group_id = ?
+                 LEFT JOIN medicine_type mt ON medicine.type_id = mt.type_id
+                 LEFT JOIN medicine_group mg ON medicine.group_id = mg.group_id
+                 LEFT JOIN medicine_take_time mtt ON medicine.medicine_id = mtt.medicine_id
+                 LEFT JOIN take_time tt ON mtt.take_time_id = tt.take_time_id
+        WHERE medicine.group_id in (SELECT group_id FROM medicine_group WHERE user_id = ?)
+          AND (medicine_name COLLATE utf8mb4_unicode_ci LIKE ? OR hospital_name COLLATE utf8mb4_unicode_ci LIKE ?)
+        GROUP BY mtt.medicine_id
         ORDER BY starts_date DESC`;
-
-    let [data] = await connection.query(sql, [groupId]);
-
-    for (let i = 0; i < data.length; i++) {
-        let medicineId = data[i]['medicine_id'];
-        sql = `
-            SELECT take_time_name FROM medicine_take_time
-            LEFT JOIN take_time ON medicine_take_time.take_time_id = take_time.take_time_id
-            WHERE medicine_id = ?`;
-        let [takeTime] = await connection.query(sql, [medicineId]);
-        let takeTimeArray = [];
-        for (let j = 0; j < takeTime.length; j++) {
-            takeTimeArray.push(takeTime[j]['take_time_name']);
-        }
-        data[i]['take_time'] = takeTimeArray.join(' ・ ');
-    }
+    let [data] = await connection.query(sql, [userId, `%${keyword}%`, `%${keyword}%`]);
 
     let dayArray = [];
     for (let i = 0; i < data.length; i++) {
@@ -85,8 +81,6 @@ router.get('/group/:group_id', async (ctx) => {
         result['data']['error'] = session.error;
         session.error = undefined;
     }
-
-    result['data']['group_id'] = groupId;
 
     await ctx.render('medicine-list', result);
 })

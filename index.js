@@ -51,6 +51,7 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, '/private/clou
 // Cron
 require('./app/cron-push-message');
 require('./app/cron-verify-line-access-token');
+require('./app/cron-notice-plan');
 require('./app/cron-delete-user');
 
 const indexRouter = require('./router/index');
@@ -102,6 +103,10 @@ app.use(renewMailAuthRouter.allowedMethods());
 const medicineRouter = require('./router/medicine');
 app.use(medicineRouter.routes());
 app.use(medicineRouter.allowedMethods());
+
+const searchRouter = require('./router/search');
+app.use(searchRouter.routes());
+app.use(searchRouter.allowedMethods());
 
 const medicineRegisterRouter = require('./router/medicine-register');
 app.use(medicineRegisterRouter.routes());
