@@ -211,8 +211,3 @@ tr:first-child > td > .fc-day-grid-event {
     margin-bottom: 10px;
     color: #6777ef;
 }
-
-/* bootstrap-timepicker */
-.bootstrap-timepicker-widget input {
-    border: 1px solid #808080 !important;
-}
