@@ -44,6 +44,164 @@
     </script>
 </head>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" id="modal-div1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-blue" id="exampleModalLabel">ご登録ありがとうございます。</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-html">
+                <p>チュートリアルが必要な方は、次へボタンを押してください。</p>
+                <p>必要のない方は、閉じるボタンを押してください。</p>
+                <p>※このチュートリアルは初回ログイン時にしか自動的に表示されませんが、使い方ページで再度表示させることができます。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                <button type="button" class="btn btn-primary" onclick="disp1()" id="modal-btn">次へ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (data.login_count === 36) {
+        window.onload = function () {
+            $('#exampleModal').modal('show');
+        }
+    }
+    function disp() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal\">\n" +
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "                <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">ご登録ありがとうございます。</h5>\n" +
+            "                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "               <p>チュートリアルが必要な方は、次へボタンを押してください。</p>\n" +
+            "               <p>必要のない方は、閉じるボタンを押してください。</p>\n" +
+            "               <p>※このチュートリアルは初回ログイン時にしか自動的に表示されませんが、使い方ページで再度表示させることができます。</p>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">閉じる</button>\n" +
+            "                <button type=\"button\" class=\"btn btn-primary\" onclick=\"disp1()\" id=\"modal-btn\">次へ</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+    function disp1() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal\">\n" +
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "                <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">それでは、薬情報の登録と確認についてご説明いたします。</h5>\n" +
+            "                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "              <img class=\"introduction-image2\" src=\"/introduction/menyu.jpg\">\n" +
+            "               <p>トップページの左上のメニューボタンを押すとこのページと同じメニューが表示されます。メニューの中から薬情報登録をタップしてください。</p>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" onclick=\"disp()\">戻る</button>\n" +
+            "                <button type=\"button\" class=\"btn btn-primary\" onclick=\"disp2()\" id=\"modal-btn\">次へ</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+    function disp2() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal-div\">\n"+
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "               <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">薬情報登録について</h5>\n" +
+            "               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "              <img class=\"introduction-image2\" src=\"/introduction/touroku.jpg\">\n" +
+            "               <p>薬情報登録には必須項目の入力または選択を全て完了した後に登録ボタンを押してください。<br>※オプション項目は必須項目ではありません。</p>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" onclick=\"disp1()\">戻る</button>\n" +
+            "                <button type=\"button\" class=\"btn btn-primary\" onclick=\"disp3()\" id=\"modal-btn\">次へ</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+    function disp3() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal-div\">\n"+
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "                <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">登録した薬情報の確認について</h5>\n" +
+            "               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "              <img class=\"introduction-image2\" src=\"/introduction/kakuninn.jpg\">\n" +
+            "               <p>薬情報の登録が完了すると薬情報一覧ページが表示されます。このページで薬情報が登録されたことが確認できます。</p>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" onclick=\"disp2()\">戻る</button>\n" +
+            "                <button type=\"button\" class=\"btn btn-primary\" onclick=\"disp4()\" id=\"modal-btn\">次へ</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+    function disp4() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal-div\">\n"+
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "                <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">チュートリアルはいかがでしたでしょうか？</h5>\n" +
+            "               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "               <p>薬情報の登録と確認についてお伝えいたしましたが、当アプリケーションには他にも様々な機能がございます。</p>\n" +
+            "               <p>今回お伝えしていない機能につきましては、使い方ページにてご説明しておりますのでよろしければご確認ください。</p>\n" +
+            "               <br>\n" +
+            "               <a href=\"introduction\" class=\"btn btn-primary\">使い方ページへ</a>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" onclick=\"disp3()\">戻る</button>\n" +
+            "                <button type=\"button\" class=\"btn btn-primary\" onclick=\"disp5()\" id=\"modal-btn\">次へ</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+    function disp5() {
+        document.getElementById("exampleModal").innerHTML = "" +
+            "<div class=\"modal-dialog modal-lg\" role=\"document\" id=\"div-modal-div\">\n"+
+            "        <div class=\"modal-content\">\n" +
+            "            <div class=\"modal-header\">\n" +
+            "                <h5 class=\"modal-title text-blue\" id=\"exampleModalLabel\">それでは実際に薬の情報の登録をしてみましょう。</h5>\n" +
+            "                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                   <span aria-hidden=\"true\">&times;</span>\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-body\" id=\"modal-html\">\n" +
+            "            <a href=\"medicine-register\" class=\"btn btn-primary\">薬情報の登録</a>\n" +
+            "            </div>\n" +
+            "            <div class=\"modal-footer\">\n" +
+            "                <button type=\"button\" class=\"btn btn-secondary\" onclick=\"disp4()\">戻る</button>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "</div>";
+    }
+</script>
+
 <body class="layout-2">
     <div id="app">
         <div class="main-wrapper">

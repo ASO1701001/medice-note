@@ -34,6 +34,13 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
 
     session.success.message = 'ログインしました';
 
+    sql = "SELECT login_log_id FROM user_login_log WHERE mail = (SELECT mail FROM user WHERE user_id=?)";
+    let login_count = (await connection.query(sql, [userId]))[0].length;
+
+    session.login_count = login_count;
+
+    console.log(login_count);
+
     return ctx.redirect('/');
 });
 
