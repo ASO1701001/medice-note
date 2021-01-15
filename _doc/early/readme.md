@@ -6,7 +6,7 @@
 
 ### エビデンス
 * [テスト仕様書](/_doc/early/evidence/テスト仕様書.xlsx)
-* [ユーザー分析結果報告書](/_doc/early/evidence/ユーザー分析関連資料)
+* [ユーザー分析結果報告書](/_doc/early/evidence/ユーザー分析結果報告書.docx)
 * ユーザー分析関連資料
     * アクセスデバイス
         * [PDF](/_doc/early/evidence/ユーザー分析関連資料/アクセスデバイス.pdf)
