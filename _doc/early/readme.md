@@ -1,0 +1,36 @@
+## 前期提出物
+### プレゼンテーション
+* [プレゼンテーションファイル](/_doc/early/presentation/pptx/presentation_v2.pptx)
+* [プレゼンテーション原稿](/_doc/early/presentation/manuscript/プレゼン原稿_V2.docx)
+* [プレゼンテーション動画](/_doc/early/presentation/mp4/presentation_v2.mp4)
+
+### エビデンス
+* [テスト仕様書](/_doc/early/evidence/テスト仕様書.xlsx)
+* [ユーザー分析結果報告書](/_doc/early/evidence/ユーザー分析関連資料)
+* ユーザー分析関連資料
+    * アクセスデバイス
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/アクセスデバイス.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/アクセスデバイス.xlsx)
+    * アクセスブラウザ
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/アクセスブラウザ.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/アクセスブラウザ.xlsx)
+    * アクセスユーザー
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/アクセスユーザー.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/アクセスユーザー.xlsx)
+    * アクティブユーザー
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/アクティブユーザー.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/アクティブユーザー.xlsx)
+    * ページビュー
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/ページビュー.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/ページビュー.xlsx)
+    * ユーザーアクセス方法
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/ユーザーアクセス方法.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/ユーザーアクセス方法.xlsx)
+    * ユーザー維持率
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/ユーザー維持率.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/ユーザー維持率.xlsx)
+    * 新規orリピーター
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/新規orリピーター.pdf)
+        * [Excel](/_doc/early/evidence/ユーザー分析関連資料/新規orリピーター.xlsx)
+    * 行動フロー
+        * [PDF](/_doc/early/evidence/ユーザー分析関連資料/行動フロー.pdf)

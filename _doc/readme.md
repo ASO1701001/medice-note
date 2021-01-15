@@ -39,7 +39,7 @@ Medice-Note (Web版のお薬手帳)
 * LINE通知設定 
 * グループ管理(子供の薬情報の追加) 
 ## データベース保存情報
-<https://docs.google.com/spreadsheets/d/15yqvmIQcujIW6Wj4wH_AHEETjgSsjlWsvHQ-cLGAk0Y/edit#gid=0>
+[データベース保存情報](/_doc/設計書/データベース/保存情報.xlsx)
 ## 動作環境
 PCやスマートフォンから利用できるWebアプリケーション形式
 ## 開発環境
