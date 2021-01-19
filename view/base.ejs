@@ -201,4 +201,78 @@
     <% } %>
 </body>
 
+<div class="modal fade" id="modal-tutorial" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs d-none" id="modal-tutorial-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-tutorial-1" data-toggle="tab" href="#tab-c-tutorial-tab-1" role="tab" aria-controls="tab-tutorial-1" aria-selected="true">1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-2" data-toggle="tab" href="#tab-c-tutorial-tab-2" role="tab" aria-controls="tab-tutorial-2" aria-selected="false">2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-3" data-toggle="tab" href="#tab-c-tutorial-tab-3" role="tab" aria-controls="tab-tutorial-3" aria-selected="false">3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-4" data-toggle="tab" href="#tab-c-tutorial-tab-4" role="tab" aria-controls="tab-tutorial-4" aria-selected="false">4</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-5" data-toggle="tab" href="#tab-c-tutorial-tab-5" role="tab" aria-controls="tab-tutorial-5" aria-selected="false">5</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="modal-tutorial-content">
+                    <div class="tab-pane fade show active" id="tab-c-tutorial-tab-1" role="tabpanel" aria-labelledby="tab-tutorial-1">
+                        MEDICE NOTEに登録いただきありがとうございます<br>
+                        チュートリアルが不要な場合は、そのままモーダルの外をクリックするか「チュートリアル終了」を押して終了してください
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-2" role="tabpanel" aria-labelledby="tab-tutorial-2">
+                        <!-- content -->
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-3" role="tabpanel" aria-labelledby="tab-tutorial-3">
+                        <!-- content -->
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-4" role="tabpanel" aria-labelledby="tab-tutorial-4">
+                        <!-- content -->
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-5" role="tabpanel" aria-labelledby="tab-tutorial-5">
+                        <p>以上でチュートリアルは終了です</p>
+                        <p><a class="btn btn-primary" href="/medicine-register">お薬を登録</a></p>
+                        <p><a class="btn btn-primary" href="/introduction">詳細な使い方を確認</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-tutorial-dismiss" class="btn btn-secondary mr-auto">チュートリアル終了</button>
+                <button type="button" id="modal-tutorial-previous" class="btn btn-secondary">前へ</button>
+                <button type="button" id="modal-tutorial-next" class="btn btn-primary">次へ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<% if (typeof data.meta.new_registration !== "undefined" && data.meta.new_registration) { %>
+    <script>
+        $('#modal-tutorial').modal('show');
+
+        $('#modal-tutorial-dismiss').click(function () {
+            history.replaceState('','','/');
+            $('#modal-tutorial').modal('hide');
+        });
+
+        $('#modal-tutorial-next').click(function() {
+            $('.nav-tabs > .nav-item > .active').parent().next('li').find('a').trigger('click');
+        });
+
+        $('#modal-tutorial-previous').click(function() {
+            $('.nav-tabs > .nav-item > .active').parent().prev('li').find('a').trigger('click');
+        });
+    </script>
+<% } %>
+
 </html>

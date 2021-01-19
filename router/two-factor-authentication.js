@@ -43,7 +43,13 @@ router.get('/two-factor-authentication/:auth_key', async (ctx) => {
     session.ga.flow = 'tow_factor_authentication';
     session.ga.result = true;
 
-    return ctx.redirect('/');
+    sql = "SELECT COUNT(login_log_id) count FROM user_login_log WHERE mail = (SELECT mail FROM user WHERE user_id = ?)";
+    let [loginCount] = await connection.query(sql, [userId])
+    if (parseInt(loginCount[0]['count']) === 1) {
+        return ctx.redirect('/?from=new-registration');
+    } else {
+        return ctx.redirect('/');
+    }
 });
 
 module.exports = router;
