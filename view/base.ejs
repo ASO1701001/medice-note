@@ -229,22 +229,39 @@
                 </ul>
                 <div class="tab-content" id="modal-tutorial-content">
                     <div class="tab-pane fade show active" id="tab-c-tutorial-tab-1" role="tabpanel" aria-labelledby="tab-tutorial-1">
-                        MEDICE NOTEに登録いただきありがとうございます<br>
-                        チュートリアルが不要な場合は、そのままモーダルの外をクリックするか「チュートリアル終了」を押して終了してください
+                        <p class="text-welcome">ご登録ありがとうございます。</p>
+                        チュートリアルが必要な方は、次へボタンを押してください。<br>
+                        必要のない方は、閉じるボタンを押してください。<br>
+                        ※このチュートリアルは初回ログイン時にしか自動的に表示されませんが、使い方ページで再度表示させることができます。
                     </div>
                     <div class="tab-pane fade" id="tab-c-tutorial-tab-2" role="tabpanel" aria-labelledby="tab-tutorial-2">
-                        <!-- content -->
+                        <p class="text-welcome">それでは、薬情報の登録と確認についてご説明いたします。</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-menu-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-menu.jpg">
+                        トップページの左上のメニューボタンを押すとこのページと同じメニューが表示されます。メニューの中から薬情報登録をタップしてください。
                     </div>
                     <div class="tab-pane fade" id="tab-c-tutorial-tab-3" role="tabpanel" aria-labelledby="tab-tutorial-3">
-                        <!-- content -->
+                        <p class="text-welcome">薬情報登録について</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-register-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-register.jpg">
+                        薬情報登録には必須項目の入力または選択を全て完了した後に登録ボタンを押してください。<br>
+                        ※オプション項目は必須項目ではありません。
                     </div>
                     <div class="tab-pane fade" id="tab-c-tutorial-tab-4" role="tabpanel" aria-labelledby="tab-tutorial-4">
-                        <!-- content -->
+                        <p class="text-welcome">登録した薬情報の確認について</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-verification-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-verification.jpg">
+
+
+                        薬情報の登録が完了すると薬情報一覧ページが表示されます。このページで薬情報が登録されたことが確認できます。
                     </div>
                     <div class="tab-pane fade" id="tab-c-tutorial-tab-5" role="tabpanel" aria-labelledby="tab-tutorial-5">
-                        <p>以上でチュートリアルは終了です</p>
-                        <p><a class="btn btn-primary" href="/medicine-register">お薬を登録</a></p>
-                        <p><a class="btn btn-primary" href="/introduction">詳細な使い方を確認</a></p>
+                        <p class="text-welcome">チュートリアルはいかがでしたでしょうか？</p>
+                        薬情報の登録と確認についてお伝えいたしましたが、当アプリケーションには他にも様々な機能がございます。<br>
+                        今回お伝えしていない機能につきましては、使い方ページにてご説明しておりますのでよろしければご確認ください。<br>
+                        <p><a class="btn btn-primary btn-margin" href="/introduction">使い方ページへ</a></p>
+                        <p class="text-welcome">それでは、実際に薬の情報の登録をしてみましょう。</p>
+                        <p><a class="btn btn-primary btn-margin" href="/medicine-register">お薬を登録</a></p>
                     </div>
                 </div>
             </div>
@@ -256,11 +273,13 @@
         </div>
     </div>
 </div>
-<% if (typeof data.meta.new_registration !== "undefined" && data.meta.new_registration) { %>
     <script>
+        <% if (typeof data.meta.new_registration !== "undefined" && data.meta.new_registration) { %>
         $('#modal-tutorial').modal('show');
+        <% } %>
 
         $('#modal-tutorial-dismiss').click(function () {
+            console.log('click')
             history.replaceState('','','/');
             $('#modal-tutorial').modal('hide');
         });
@@ -273,6 +292,5 @@
             $('.nav-tabs > .nav-item > .active').parent().prev('li').find('a').trigger('click');
         });
     </script>
-<% } %>
 
 </html>
