@@ -226,7 +226,6 @@ tr:first-child > td > .fc-day-grid-event {
     height: auto;
     margin: auto;
     border-radius: 5px;
-    object-fit: cover;
 }
 .introduction-image-sp { display: none !important; }
 
@@ -241,6 +240,5 @@ tr:first-child > td > .fc-day-grid-event {
         height: auto;
         margin: auto;
         border-radius: 5px;
-        object-fit: cover;
     }
 }
