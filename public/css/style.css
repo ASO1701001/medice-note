@@ -198,6 +198,8 @@ tr:first-child > td > .fc-day-grid-event {
 /* introduction css */
 .introduction-image {
     width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 .text-blue {
@@ -211,3 +213,12 @@ tr:first-child > td > .fc-day-grid-event {
     margin-bottom: 10px;
     color: #6777ef;
 }
+
+.introduction-image2 {
+    width: 300px;
+    height: 500px;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+}
+
