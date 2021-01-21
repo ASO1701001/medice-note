@@ -201,7 +201,6 @@ tr:first-child > td > .fc-day-grid-event {
     margin-top: 5px;
     border-radius: 5px;
 }
-
 .text-blue {
     color: #6777ef;
     margin-top: 5px;
@@ -213,13 +212,11 @@ tr:first-child > td > .fc-day-grid-event {
     margin-bottom: 5px;
     font-size: 15px;
 }
-
 .text-introduction {
     margin-top: 10px;
     margin-bottom: 10px;
     color: #6777ef;
 }
-
 .introduction-image-pc {
     display: block !important;
     width: 100%;
@@ -227,8 +224,9 @@ tr:first-child > td > .fc-day-grid-event {
     margin: auto;
     border-radius: 5px;
 }
-.introduction-image-sp { display: none !important; }
-
+.introduction-image-sp {
+    display: none !important;
+}
 /* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
 @media only screen and (max-width: 750px) {
     .introduction-image-pc {
