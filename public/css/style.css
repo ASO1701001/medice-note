@@ -203,11 +203,12 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
 .introduction-image2 {
-    width: 300px;
-    height: 500px;
+    width: 80%;
+    height: auto;
     display: block;
     margin: auto;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .text-blue {
