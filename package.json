@@ -36,5 +36,7 @@
     "uuid": "^8.1.0",
     "validatorjs": "^3.18.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "koa-bodyparser": "^4.3.0"
+  }
 }
