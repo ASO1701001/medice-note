@@ -201,4 +201,95 @@
     <% } %>
 </body>
 
+<div class="modal fade" id="modal-tutorial" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs d-none" id="modal-tutorial-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-tutorial-1" data-toggle="tab" href="#tab-c-tutorial-tab-1" role="tab" aria-controls="tab-tutorial-1" aria-selected="true">1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-2" data-toggle="tab" href="#tab-c-tutorial-tab-2" role="tab" aria-controls="tab-tutorial-2" aria-selected="false">2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-3" data-toggle="tab" href="#tab-c-tutorial-tab-3" role="tab" aria-controls="tab-tutorial-3" aria-selected="false">3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-4" data-toggle="tab" href="#tab-c-tutorial-tab-4" role="tab" aria-controls="tab-tutorial-4" aria-selected="false">4</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-tutorial-5" data-toggle="tab" href="#tab-c-tutorial-tab-5" role="tab" aria-controls="tab-tutorial-5" aria-selected="false">5</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="modal-tutorial-content">
+                    <div class="tab-pane fade show active" id="tab-c-tutorial-tab-1" role="tabpanel" aria-labelledby="tab-tutorial-1">
+                        <p class="text-welcome">ご登録ありがとうございます。</p>
+                        チュートリアルが必要な方は、次へボタンを押してください。<br>
+                        必要のない方は、閉じるボタンを押してください。<br>
+                        ※このチュートリアルは初回ログイン時にしか自動的に表示されませんが、使い方ページで再度表示させることができます。
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-2" role="tabpanel" aria-labelledby="tab-tutorial-2">
+                        <p class="text-welcome">それでは、薬情報の登録と確認についてご説明いたします。</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-menu-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-menu.jpg">
+                        トップページの左上のメニューボタンを押すとこのページと同じメニューが表示されます。メニューの中から薬情報登録をタップしてください。
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-3" role="tabpanel" aria-labelledby="tab-tutorial-3">
+                        <p class="text-welcome">薬情報登録について</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-register-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-register.jpg">
+                        薬情報登録には必須項目の入力または選択を全て完了した後に登録ボタンを押してください。<br>
+                        ※オプション項目は必須項目ではありません。
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-4" role="tabpanel" aria-labelledby="tab-tutorial-4">
+                        <p class="text-welcome">登録した薬情報の確認について</p>
+                        <img class="introduction-image-pc" src="/introduction/welcome-verification-pc.jpg">
+                        <img class="introduction-image-sp" src="/introduction/welcome-verification.jpg">
+
+
+                        薬情報の登録が完了すると薬情報一覧ページが表示されます。このページで薬情報が登録されたことが確認できます。
+                    </div>
+                    <div class="tab-pane fade" id="tab-c-tutorial-tab-5" role="tabpanel" aria-labelledby="tab-tutorial-5">
+                        <p class="text-welcome">チュートリアルはいかがでしたでしょうか？</p>
+                        薬情報の登録と確認についてお伝えいたしましたが、当アプリケーションには他にも様々な機能がございます。<br>
+                        今回お伝えしていない機能につきましては、使い方ページにてご説明しておりますのでよろしければご確認ください。<br>
+                        <p><a class="btn btn-primary btn-margin" href="/introduction">使い方ページへ</a></p>
+                        <p class="text-welcome">それでは、実際に薬の情報の登録をしてみましょう。</p>
+                        <p><a class="btn btn-primary btn-margin" href="/medicine-register">お薬を登録</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-tutorial-dismiss" class="btn btn-secondary mr-auto">チュートリアル終了</button>
+                <button type="button" id="modal-tutorial-previous" class="btn btn-secondary">前へ</button>
+                <button type="button" id="modal-tutorial-next" class="btn btn-primary">次へ</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        <% if (typeof data.meta.new_registration !== "undefined" && data.meta.new_registration) { %>
+        $('#modal-tutorial').modal('show');
+        <% } %>
+
+        $('#modal-tutorial-dismiss').click(function () {
+            history.replaceState('','','/');
+            $('#modal-tutorial').modal('hide');
+        });
+
+        $('#modal-tutorial-next').click(function() {
+            $('.nav-tabs > .nav-item > .active').parent().next('li').find('a').trigger('click');
+        });
+
+        $('#modal-tutorial-previous').click(function() {
+            $('.nav-tabs > .nav-item > .active').parent().prev('li').find('a').trigger('click');
+        });
+    </script>
+
 </html>

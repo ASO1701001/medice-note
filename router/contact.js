@@ -4,6 +4,7 @@ const validator = require('validatorjs');
 const app = require('../app/app');
 const transporter = require('../app/mail');
 const config = require('../config.json');
+const connection = require('../app/db');
 
 router.get('/contact', async (ctx) => {
     let session = ctx.session;
@@ -21,6 +22,10 @@ router.get('/contact', async (ctx) => {
 
     if (Boolean(userId)) {
         result['data']['meta']['group_list'] = await app.getGroupList(userId);
+        let sql = 'SELECT mail FROM user WHERE user_id = ?';
+        let [user] = await connection.query(sql, [userId]);
+        user = user[0]
+        result['data']['old']['mail'] = user['mail']
     }
 
     if (session.success !== undefined) {
@@ -33,7 +38,7 @@ router.get('/contact', async (ctx) => {
         session.error = undefined;
     }
 
-    if (session.old !== undefined) {
+    if (session.old !== undefined && Object.keys(session.old).length !== 0) {
         result['data']['old'] = session.old;
         session.old = undefined;
     }
