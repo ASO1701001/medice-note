@@ -20,6 +20,7 @@ router.get('/', async (ctx) => {
 
     if (Boolean(userId)) {
         result['data']['meta']['group_list'] = await app.getGroupList(userId);
+        result['data']['meta']['new_registration'] = ctx.request.query['from'] !== undefined && ctx.request.query['from'] === 'new-registration';
 
         let sql = 'SELECT message, message_flg FROM user_message WHERE user_id = ?';
         let [message] = await connection.query(sql, [userId]);
